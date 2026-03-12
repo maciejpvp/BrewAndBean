@@ -1,0 +1,311 @@
+{
+    "categories": [
+        {
+            "id": "cat_1",
+            "name": "Coffee",
+            "slug": "coffee",
+            "sections": [
+                {
+                    "id": "sec_1_1",
+                    "title": "By Roast",
+                    "items": [
+                        {
+                            "id": "item_1",
+                            "name": "Light Roast",
+                            "slug": "light-roast"
+                        },
+                        {
+                            "id": "item_2",
+                            "name": "Medium Roast",
+                            "slug": "medium-roast"
+                        },
+                        {
+                            "id": "item_3",
+                            "name": "Dark Roast",
+                            "slug": "dark-roast"
+                        },
+                        {
+                            "id": "item_4",
+                            "name": "Decaf",
+                            "slug": "decaf"
+                        },
+                        {
+                            "id": "item_5",
+                            "name": "Espresso Roast",
+                            "slug": "espresso-roast"
+                        }
+                    ]
+                },
+                {
+                    "id": "sec_1_2",
+                    "title": "Popular Brands",
+                    "items": [
+                        {
+                            "id": "item_6",
+                            "name": "Stumptown",
+                            "slug": "stumptown"
+                        },
+                        {
+                            "id": "item_7",
+                            "name": "Blue Bottle",
+                            "slug": "blue-bottle"
+                        },
+                        {
+                            "id": "item_8",
+                            "name": "Intelligentsia",
+                            "slug": "intelligentsia"
+                        },
+                        {
+                            "id": "item_9",
+                            "name": "La Colombe",
+                            "slug": "la-colombe"
+                        },
+                        {
+                            "id": "item_10",
+                            "name": "Onyx Coffee Lab",
+                            "slug": "onyx-coffee-lab"
+                        }
+                    ]
+                },
+                {
+                    "id": "sec_1_3",
+                    "title": "Best Sellers",
+                    "items": [
+                        {
+                            "id": "item_11",
+                            "name": "Holler Mountain",
+                            "slug": "holler-mountain"
+                        },
+                        {
+                            "id": "item_12",
+                            "name": "Hayes Valley Espresso",
+                            "slug": "hayes-valley-espresso"
+                        },
+                        {
+                            "id": "item_13",
+                            "name": "Black Cat Classic",
+                            "slug": "black-cat-classic"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "cat_2",
+            "name": "Tea",
+            "slug": "tea",
+            "sections": [
+                {
+                    "id": "sec_2_1",
+                    "title": "Loose Leaf",
+                    "items": [
+                        {
+                            "id": "item_14",
+                            "name": "Classic Green",
+                            "slug": "classic-green-tea"
+                        },
+                        {
+                            "id": "item_15",
+                            "name": "English Breakfast",
+                            "slug": "english-breakfast"
+                        },
+                        {
+                            "id": "item_16",
+                            "name": "Earl Grey",
+                            "slug": "earl-grey"
+                        },
+                        {
+                            "id": "item_17",
+                            "name": "Silver Needle White",
+                            "slug": "silver-needle-white"
+                        }
+                    ]
+                },
+                {
+                    "id": "sec_2_2",
+                    "title": "Herbal & Specialty",
+                    "items": [
+                        {
+                            "id": "item_18",
+                            "name": "Chamomile Dream",
+                            "slug": "chamomile-dream"
+                        },
+                        {
+                            "id": "item_19",
+                            "name": "Peppermint",
+                            "slug": "peppermint"
+                        },
+                        {
+                            "id": "item_20",
+                            "name": "Rooibos",
+                            "slug": "rooibos"
+                        },
+                        {
+                            "id": "item_21",
+                            "name": "Ceremonial Matcha",
+                            "slug": "ceremonial-matcha"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "cat_3",
+            "name": "Infusers",
+            "slug": "infusers",
+            "sections": [
+                {
+                    "id": "sec_3_1",
+                    "title": "Stovetop & Immersion",
+                    "items": [
+                        {
+                            "id": "item_22",
+                            "name": "Aeropress",
+                            "slug": "aeropress"
+                        },
+                        {
+                            "id": "item_23",
+                            "name": "Moka Pot",
+                            "slug": "moka-pot"
+                        },
+                        {
+                            "id": "item_24",
+                            "name": "French Press",
+                            "slug": "french-press"
+                        }
+                    ]
+                },
+                {
+                    "id": "sec_3_2",
+                    "title": "Pour Over",
+                    "items": [
+                        {
+                            "id": "item_25",
+                            "name": "Chemex",
+                            "slug": "chemex"
+                        },
+                        {
+                            "id": "item_26",
+                            "name": "Hario V60",
+                            "slug": "hario-v60"
+                        },
+                        {
+                            "id": "item_27",
+                            "name": "Kalita Wave",
+                            "slug": "kalita-wave"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "cat_4",
+            "name": "Grinders",
+            "slug": "grinders",
+            "sections": [
+                {
+                    "id": "sec_4_1",
+                    "title": "Burr Type",
+                    "items": [
+                        {
+                            "id": "type_4_1_1",
+                            "name": "Conical Burr",
+                            "slug": "conical-burr-grinders"
+                        },
+                        {
+                            "id": "type_4_1_2",
+                            "name": "Flat Burr",
+                            "slug": "flat-burr-grinders"
+                        }
+                    ]
+                },
+                {
+                    "id": "sec_4_2",
+                    "title": "Operation",
+                    "items": [
+                        {
+                            "id": "type_4_2_1",
+                            "name": "Automatic Electric",
+                            "slug": "electric-grinders"
+                        },
+                        {
+                            "id": "type_4_2_2",
+                            "name": "Hand-Crank Manual",
+                            "slug": "manual-grinders"
+                        }
+                    ]
+                },
+                {
+                    "id": "sec_4_3",
+                    "title": "Brew Application",
+                    "items": [
+                        {
+                            "id": "type_4_3_1",
+                            "name": "Espresso Specialized",
+                            "slug": "espresso-grinders"
+                        },
+                        {
+                            "id": "type_4_3_2",
+                            "name": "Filter & Pour Over",
+                            "slug": "filter-grinders"
+                        },
+                        {
+                            "id": "type_4_3_3",
+                            "name": "All-Purpose",
+                            "slug": "all-purpose-grinders"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "cat_5",
+            "name": "Accessories",
+            "slug": "accessories",
+            "sections": [
+                {
+                    "id": "sec_5_1",
+                    "title": "Precision",
+                    "items": [
+                        {
+                            "id": "item_34",
+                            "name": "Acaia Pearl Scale",
+                            "slug": "acaia-pearl-scale"
+                        },
+                        {
+                            "id": "item_35",
+                            "name": "Fellow Stagg EKG",
+                            "slug": "fellow-stagg-ekg"
+                        },
+                        {
+                            "id": "item_36",
+                            "name": "Timemore Black Mirror",
+                            "slug": "timemore-black-mirror"
+                        }
+                    ]
+                },
+                {
+                    "id": "sec_5_2",
+                    "title": "Essentials",
+                    "items": [
+                        {
+                            "id": "item_37",
+                            "name": "Paper Filters",
+                            "slug": "paper-filters"
+                        },
+                        {
+                            "id": "item_38",
+                            "name": "Cleaning Brushes",
+                            "slug": "cleaning-brushes"
+                        },
+                        {
+                            "id": "item_39",
+                            "name": "Storage Canisters",
+                            "slug": "storage-canisters"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
