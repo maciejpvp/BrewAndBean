@@ -1,9 +1,11 @@
 import axios from 'axios';
 
-const BASE_URL = import.meta.env.VITE_API_BASE_URL as string ?? 'https://d17q0wnd7fgmqz.cloudfront.net';
+// https://5w9v2sffs8.execute-api.eu-central-1.amazonaws.com/prod
+// d17q0wnd7fgmqz.cloudfront.net
+const BASE_URL = 'https://d17q0wnd7fgmqz.cloudfront.net/api';
 
 export const apiClient = axios.create({
-    baseURL: `${BASE_URL}/api`,
+    baseURL: `${BASE_URL}`,
     headers: {
         'Content-Type': 'application/json',
     },

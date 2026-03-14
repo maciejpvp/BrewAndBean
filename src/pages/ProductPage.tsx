@@ -18,7 +18,8 @@ import {
 } from '@mui/icons-material';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useProduct } from '../hooks/useProduct';
-import { getProductImageUrl } from '../types/product';
+import { useCart, useUpdateCart, useAddToCart } from '../hooks/useCart';
+import { getProductImageUrl, getProductId } from '../types/product';
 
 // Extracted Sub-components
 import { ProductPageSkeleton } from '../components/products/product-detail/ProductPageSkeleton';
@@ -30,6 +31,28 @@ export const ProductPage = () => {
     const navigate = useNavigate();
     const { data: product, isLoading, isError, error } = useProduct(id);
     const [quantity, setQuantity] = useState(1);
+    
+    const { data: cartResponse } = useCart();
+    const { mutate: addToCart, isPending: isAddingToCart } = useAddToCart();
+    const { mutate: updateCart, isPending: isUpdatingCart } = useUpdateCart();
+
+    const handleAddToCart = () => {
+        if (!product) return;
+        const productId = getProductId(product);
+        const cartItems = cartResponse?.cartItems || [];
+        
+        const existingItem = cartItems.find(
+            (i) => i.item.PK.replace('PRODUCT#', '') === productId || i.item.PK === productId
+        );
+
+        if (existingItem) {
+            updateCart({ productId, quantity: existingItem.quantity + quantity });
+        } else {
+            addToCart({ productId, quantity, product });
+        }
+    };
+
+    const isMutating = isAddingToCart || isUpdatingCart;
 
     if (isLoading) return <ProductPageSkeleton />;
 
@@ -239,13 +262,14 @@ export const ProductPage = () => {
                                 />
                                 <Button
                                     variant="contained"
-                                    disabled={isOutOfStock}
+                                    disabled={isOutOfStock || isMutating}
+                                    onClick={handleAddToCart}
                                     startIcon={<AddShoppingCart />}
                                     sx={{
                                         flexGrow: 1,
                                         height: 48,
                                         borderRadius: 2.5,
-                                        background: isOutOfStock
+                                        background: isOutOfStock || isMutating
                                             ? undefined
                                             : 'linear-gradient(135deg, #3D2B1F 0%, #6F4E37 100%)',
                                         fontWeight: 700,
@@ -259,7 +283,7 @@ export const ProductPage = () => {
                                         '&:active': { transform: 'translateY(0)' },
                                     }}
                                 >
-                                    {isOutOfStock ? 'Out of Stock' : 'Add to Cart'}
+                                    {isOutOfStock ? 'Out of Stock' : isMutating ? 'Adding...' : 'Add to Cart'}
                                 </Button>
                             </Box>
 
