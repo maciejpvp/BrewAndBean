@@ -7,7 +7,7 @@ export const Navbar = () => (
         position="sticky"
         color="default"
         elevation={0}
-        sx={{ borderBottom: '1px solid #f0f0f0', bgcolor: '#fff' }}
+        sx={{ borderBottom: '1px solid #f0f0f0', bgcolor: '#fbf9f5' }}
     >
         <Container maxWidth="xl">
             <NavbarTop />

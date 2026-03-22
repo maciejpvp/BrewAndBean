@@ -1,4 +1,5 @@
 import { apiClient } from '../lib/apiClient';
+import type { ProductMedia } from '../types/product';
 
 export type CartItemInput = {
     productId: string;
@@ -20,6 +21,7 @@ export type OrderSummaryItem = {
     discountApplied: number;
     subtotal: number;
     appliedRules: string[];
+    media?: ProductMedia[];
 };
 
 export type OrderSummary = {

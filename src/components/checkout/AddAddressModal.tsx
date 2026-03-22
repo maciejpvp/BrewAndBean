@@ -184,14 +184,6 @@ export const AddAddressModal: React.FC<AddAddressModalProps> = ({ open, onClose,
                             variant="text"
                             onClick={onClose}
                             disabled={mutation.isPending}
-                            sx={{ 
-                                textTransform: 'none',
-                                color: '#6b7280',
-                                fontWeight: 700,
-                                padding: '0.625rem 1.5rem',
-                                borderRadius: '0.75rem',
-                                '&:hover': { backgroundColor: '#f3f4f6' }
-                            }}
                         >
                             Cancel
                         </Button>
@@ -199,24 +191,6 @@ export const AddAddressModal: React.FC<AddAddressModalProps> = ({ open, onClose,
                             type="submit"
                             variant="contained"
                             disabled={mutation.isPending}
-                            sx={{ 
-                                textTransform: 'none',
-                                backgroundColor: '#111827',
-                                color: '#ffffff',
-                                fontWeight: 700,
-                                padding: '0.625rem 2rem',
-                                borderRadius: '0.75rem',
-                                boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
-                                '&:hover': { 
-                                    backgroundColor: '#000000',
-                                    boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
-                                    transform: 'translateY(-2px)'
-                                },
-                                '&:disabled': {
-                                    backgroundColor: '#e5e7eb',
-                                    color: '#9ca3af'
-                                }
-                            }}
                         >
                             {mutation.isPending ? <CircularProgress size={24} color="inherit" /> : 'Save Address'}
                         </Button>

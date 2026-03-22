@@ -15,7 +15,7 @@ import categoryData from '../data/categories.json';
 // Styled Search Input for Luxury Feel
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
-    borderRadius: '20px',
+    borderRadius: 0,
     backgroundColor: alpha(theme.palette.common.black, 0.03),
     '&:hover': { backgroundColor: alpha(theme.palette.common.black, 0.05) },
     width: '400px',
@@ -83,10 +83,10 @@ const MegaDropdown = styled(Box)(({ theme }) => ({
     left: 0,
     zIndex: theme.zIndex.modal,
     // Appearance
-    backgroundColor: '#fff',
-    borderRadius: '16px',
-    boxShadow: '0 8px 32px rgba(0,0,0,0.12)',
-    border: '1px solid rgba(0,0,0,0.08)',
+    backgroundColor: theme.palette.background.paper,
+    borderRadius: 0,
+    boxShadow: '0px 8px 40px rgba(23, 24, 24, 0.05)',
+    border: 'none',
     padding: theme.spacing(3),
     display: 'flex',
     gap: theme.spacing(4),
@@ -107,7 +107,7 @@ export const Navbar = () => {
     };
 
     return (
-        <AppBar position="sticky" color="default" elevation={0} sx={{ borderBottom: '1px solid #f0f0f0', bgcolor: '#fff' }}>
+        <AppBar position="sticky" color="default" elevation={0} sx={{ borderBottom: 'none', bgcolor: 'rgba(251, 249, 245, 0.8)', backdropFilter: 'blur(20px)' }}>
             <Container maxWidth="xl">
                 {/* Top Tier: Logo, Search, Icons */}
                 <Toolbar sx={{ justifyContent: 'space-between', py: 1 }}>

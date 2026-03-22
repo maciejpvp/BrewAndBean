@@ -28,15 +28,14 @@ export const ProductItem = ({ product, onClick }: ProductItemProps) => {
                 height: '100%',
                 display: 'flex',
                 flexDirection: 'column',
-                borderRadius: 3,
-                border: '1px solid',
-                borderColor: 'rgba(61,43,31,0.1)',
+                borderRadius: 0,
+                border: 'none',
+                bgcolor: 'background.paper',
                 overflow: 'hidden',
-                transition: 'all 0.25s ease',
+                transition: 'all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1)',
                 '&:hover': {
-                    transform: 'translateY(-4px)',
-                    boxShadow: '0 16px 40px rgba(61,43,31,0.14)',
-                    borderColor: 'rgba(212,163,115,0.4)',
+                    transform: 'translateY(-8px)',
+                    boxShadow: '0 24px 60px rgba(23, 24, 24, 0.08)',
                 },
             }}
         >
@@ -80,13 +79,15 @@ export const ProductItem = ({ product, onClick }: ProductItemProps) => {
                             size="small"
                             sx={{
                                 position: 'absolute',
-                                top: 10,
-                                left: 10,
-                                bgcolor: 'rgba(35,23,9,0.75)',
-                                color: '#F5F5F1',
-                                fontWeight: 600,
+                                top: 16,
+                                left: 16,
+                                bgcolor: '#171818',
+                                color: '#fbf9f5',
+                                borderRadius: 0,
+                                fontWeight: 700,
                                 fontSize: '0.7rem',
-                                backdropFilter: 'blur(4px)',
+                                letterSpacing: '0.1em',
+                                textTransform: 'uppercase',
                             }}
                         />
                     )}
@@ -152,7 +153,7 @@ export const ProductItem = ({ product, onClick }: ProductItemProps) => {
 
 /** Skeleton placeholder with the same card dimensions */
 export const ProductItemSkeleton = () => (
-    <Card sx={{ borderRadius: 3, border: '1px solid rgba(61,43,31,0.08)', overflow: 'hidden' }}>
+    <Card sx={{ borderRadius: 0, border: 'none', bgcolor: 'background.paper', overflow: 'hidden' }}>
         <Skeleton variant="rectangular" sx={{ pt: '65%' }} />
         <CardContent sx={{ p: 2.5 }}>
             <Skeleton variant="text" sx={{ fontSize: '1.1rem', mb: 0.5 }} />

@@ -7,6 +7,7 @@ import { Button, Typography, Box, Skeleton } from '@mui/material';
 import { Plus, MapPin } from 'lucide-react';
 import styles from './Checkout.module.css';
 
+
 interface AddressListProps {
     onAddressSelected: (addressId: string | null) => void;
 }
@@ -84,31 +85,13 @@ export const AddressList: React.FC<AddressListProps> = ({ onAddressSelected }) =
                     <Typography variant="h5" className={styles.listTitle}>
                         Shipping Address
                     </Typography>
-                    <Typography variant="body2" className={styles.listSubtitle}>
-                        Where should we send your order?
-                    </Typography>
                 </Box>
-                <Button 
-                    startIcon={<Plus size={18} />} 
-                    variant="outlined"
+                <button 
                     onClick={() => setIsModalOpen(true)}
-                    sx={{ 
-                        textTransform: 'none', 
-                        borderColor: '#e5e7eb', 
-                        color: '#1f2937', 
-                        fontWeight: 700, 
-                        borderRadius: '0.75rem', 
-                        padding: '0.625rem 1.25rem',
-                        boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
-                        transition: 'all 0.3s ease',
-                        '&:hover': {
-                            backgroundColor: '#f9fafb',
-                            borderColor: '#d1d5db'
-                        }
-                    }}
+                    className={styles.addAddressButton}
                 >
                     Add New Address
-                </Button>
+                </button>
             </Box>
             
             <Box className={styles.addressGrid}>

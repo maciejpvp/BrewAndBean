@@ -43,7 +43,7 @@ export const NavbarCategoryItem = ({ category, onNavigate }: NavbarCategoryItemP
         </NavButton>
 
         {/* Mega dropdown — shown via CSS :hover on NavItem */}
-        <MegaDropdown className="mega-dropdown" sx={{ minWidth: category.sections.length * 160 }}>
+        <MegaDropdown className="mega-dropdown" sx={{ bgcolor: 'inherit', minWidth: category.sections.length * 160 }}>
             {category.sections.map((section) => (
                 <Box key={section.id} sx={{ flex: 1 }}>
                     <Typography

@@ -1,6 +1,7 @@
 import React from 'react';
-import { Box, Typography, Tooltip } from '@mui/material';
+import { Box } from '@mui/material';
 import type { OrderSummaryItem as OrderSummaryItemType } from '../../api/checkout';
+import { getProductImageUrl } from '../../types/product';
 import styles from './Checkout.module.css';
 
 interface OrderSummaryItemProps {
@@ -8,28 +9,33 @@ interface OrderSummaryItemProps {
 }
 
 export const OrderSummaryItem: React.FC<OrderSummaryItemProps> = ({ item }) => {
+  const imageUrl = item.media ? getProductImageUrl(item.media) : null;
+
   return (
-    <Box className={styles.summaryRow}>
-      <Typography variant="body2">
-        {item.name} × {item.quantity}
-      </Typography>
-      <Tooltip 
-        title={item.discountApplied > 0 ? `Applied: ${item.appliedRules.join(', ').replace(/_/g, ' ')}` : ""}
-        placement="top"
-        arrow
-      >
-        <Box style={{ display: 'flex', alignItems: 'center', cursor: item.discountApplied > 0 ? 'help' : 'default' }}>
-          {item.discountApplied > 0 && (
-            <Typography className={styles.itemBasePrice}>
-              ${(item.unitPrice * item.quantity).toFixed(2)}
-            </Typography>
-          )}
-          &nbsp;
-          <Typography variant="body2" className={styles.summaryRowValue}>
-            ${item.subtotal?.toFixed(2) ?? '-'}
-          </Typography>
+    <Box className={styles.editorialItem}>
+      {/* Product Image */}
+      <Box className={styles.editorialItemImageContainer}>
+        {imageUrl ? (
+          <img 
+            src={imageUrl} 
+            alt={item.name} 
+            className={styles.editorialItemImage} 
+          />
+        ) : (
+          <Box className={styles.editorialItemImage} style={{ backgroundColor: '#e5e1d8' }} />
+        )}
+      </Box>
+
+      {/* Product Info */}
+      <Box className={styles.editorialItemInfo}>
+        <Box className={styles.editorialItemHeader}>
+          <h3 className={styles.editorialItemName}>{item.name}</h3>
+          <span className={styles.editorialItemPrice}>${item.subtotal?.toFixed(2) ?? '-'}</span>
         </Box>
-      </Tooltip>
+        
+        <p className={styles.editorialItemQty}>Quantity: {item.quantity}</p>
+      </Box>
     </Box>
   );
 };
+

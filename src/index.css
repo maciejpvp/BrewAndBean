@@ -1,0 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap");
+
+h1,
+.headline {
+  font-family: "Noto Serif", serif;
+}
+
+p,
+.body {
+  font-family: "Manrope", sans-serif;
+  font-weight: 400;
+}
+
+label,
+.label {
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+html {
+  background-color: #fbf9f5;
+}
+
+body {
+  background-color: #fbf9f5;
+}

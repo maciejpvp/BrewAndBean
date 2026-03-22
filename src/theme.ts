@@ -3,52 +3,105 @@ import { createTheme } from '@mui/material/styles';
 const coffeeTheme = createTheme({
     palette: {
         primary: {
-            main: '#3D2B1F', // Deep Espresso
-            light: '#6F4E37', // Roasted Bean
-            dark: '#231709',
-            contrastText: '#F5F5F1',
+            main: '#171818', // Deep Charcoal
+            light: '#3d3f3f',
+            dark: '#000000',
+            contrastText: '#fbf9f5',
         },
         secondary: {
-            main: '#D4A373', // Rich Latte / Fawn
-            light: '#FAEDCD', // Cream / Milk foam
-            dark: '#BC8A5F',
+            main: '#775a19', // Soft Gold
+            light: '#a68233',
+            dark: '#4c3507',
+            contrastText: '#ffffff',
         },
         background: {
-            default: '#FDFCF8', // Paper-white with a hint of warmth
-            paper: '#FFFFFF',
+            default: '#fbf9f5', // Warm Cream (Surface)
+            paper: '#f3efe6',   // Surface-container-low
         },
         text: {
-            primary: '#2C1B10',
-            secondary: '#5F574F',
+            primary: '#171818',
+            secondary: '#4b5563',
+        },
+        error: {
+            main: '#d32f2f',
         },
     },
     typography: {
-        fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
+        fontFamily: '"Manrope", sans-serif',
         h1: {
+            fontFamily: '"Noto Serif", serif',
             fontWeight: 800,
-            letterSpacing: '-0.02em',
-            color: '#3D2B1F',
+            letterSpacing: '0.05em',
+            color: '#171818',
         },
         h2: {
+            fontFamily: '"Noto Serif", serif',
             fontWeight: 700,
-            color: '#3D2B1F',
+            color: '#171818',
+        },
+        h3: {
+            fontFamily: '"Noto Serif", serif',
+            fontWeight: 700,
+            color: '#171818',
+        },
+        h4: {
+            fontFamily: '"Noto Serif", serif',
+            fontWeight: 700,
+            color: '#171818',
+        },
+        h5: {
+            fontFamily: '"Noto Serif", serif',
+            fontWeight: 700,
+            color: '#171818',
+        },
+        h6: {
+            fontFamily: '"Noto Serif", serif',
+            fontWeight: 700,
+            color: '#171818',
         },
         button: {
-            textTransform: 'none', // Modern look (avoid all-caps)
+            textTransform: 'none',
             fontWeight: 600,
+            fontFamily: '"Manrope", sans-serif',
         },
     },
     shape: {
-        borderRadius: 12, // Softer, modern corners
+        borderRadius: 0, // Sharp corners everywhere
     },
     components: {
         MuiButton: {
             styleOverrides: {
                 root: {
-                    padding: '10px 24px',
+                    padding: '12px 28px',
                     boxShadow: 'none',
+                    borderRadius: 0,
                     '&:hover': {
-                        boxShadow: '0px 4px 12px rgba(61, 43, 31, 0.15)',
+                        boxShadow: 'none',
+                    },
+                },
+                containedPrimary: {
+                    backgroundColor: '#171818',
+                    color: '#fbf9f5',
+                    '&:hover': {
+                        backgroundColor: '#3d3f3f', // primary-container simulation
+                    },
+                },
+                outlined: {
+                    border: '1px solid rgba(23, 24, 24, 0.15)', // Ghost border fallback
+                    color: '#171818',
+                    '&:hover': {
+                        backgroundColor: 'rgba(23, 24, 24, 0.04)',
+                        border: '1px solid rgba(23, 24, 24, 0.15)',
+                    },
+                },
+                text: {
+                    color: '#171818',
+                    '&:hover': {
+                        backgroundColor: 'transparent',
+                        textDecoration: 'underline',
+                        textDecorationColor: '#775a19', // Gold underline
+                        textDecorationThickness: '2px',
+                        textUnderlineOffset: '4px',
                     },
                 },
             },
@@ -56,8 +109,39 @@ const coffeeTheme = createTheme({
         MuiCard: {
             styleOverrides: {
                 root: {
-                    border: '1px solid #E6E6E1',
-                    boxShadow: '0px 2px 4px rgba(0,0,0,0.02)',
+                    border: 'none',
+                    boxShadow: 'none',
+                    backgroundColor: '#f3efe6', // surface-container-low
+                    borderRadius: 0,
+                },
+            },
+        },
+        MuiOutlinedInput: {
+            styleOverrides: {
+                root: {
+                    borderRadius: 0,
+                    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                        borderBottom: '2px solid #171818',
+                    },
+                },
+                notchedOutline: {
+                    borderTop: 'none',
+                    borderLeft: 'none',
+                    borderRight: 'none',
+                    borderBottom: '1px solid rgba(23, 24, 24, 0.15)',
+                    borderRadius: 0,
+                },
+            },
+        },
+        MuiInputLabel: {
+            styleOverrides: {
+                root: {
+                    fontFamily: '"Manrope", sans-serif',
+                    fontSize: '0.875rem',
+                    color: '#4b5563',
+                    '&.Mui-focused': {
+                        color: '#171818',
+                    },
                 },
             },
         },
