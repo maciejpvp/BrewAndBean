@@ -1,6 +1,6 @@
 import { AppBar, Container } from '@mui/material';
-import { NavbarTop } from './NavbarTop';
-import { NavbarCategories } from './NavbarCategories';
+import { Logo } from '../Logo';
+import Categories from './Categories';
 
 export const Navbar = () => (
     <AppBar
@@ -10,8 +10,10 @@ export const Navbar = () => (
         sx={{ borderBottom: '1px solid #f0f0f0', bgcolor: '#fbf9f5' }}
     >
         <Container maxWidth="xl">
-            <NavbarTop />
-            <NavbarCategories />
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <Logo />
+                <Categories />
+            </div>
         </Container>
     </AppBar>
 );

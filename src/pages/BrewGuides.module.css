@@ -1,0 +1,612 @@
+.page {
+  background-color: #fcf9f4;
+  color: #1c1c19;
+  font-family: "Manrope", sans-serif;
+  min-height: 100vh;
+}
+
+.page ::selection {
+  background-color: #fed488;
+  color: #785a1a;
+}
+
+.main {
+  max-width: 1536px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 4rem 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .main {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+.hero {
+  margin-bottom: 8rem;
+}
+
+.heroContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 3rem;
+}
+
+@media (min-width: 768px) {
+  .heroContainer {
+    flex-direction: row;
+  }
+}
+
+.heroLeft {
+  max-width: 42rem;
+}
+
+.heroTitle {
+  font-size: 3.75rem;
+  font-family: "Noto Serif", serif;
+  font-style: italic;
+  line-height: 1.1;
+  color: #26170c;
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .heroTitle {
+    font-size: 6rem;
+  }
+}
+
+.heroText {
+  margin-top: 2rem;
+  color: #4f453f;
+  font-family: "Manrope", sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.625;
+  max-width: 32rem;
+  margin-bottom: 0;
+}
+
+.heroRight {
+  text-align: right;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .heroRight {
+    width: auto;
+  }
+}
+
+.heroLabel {
+  font-family: "Manrope", sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  color: #775a19;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.heroDate {
+  font-family: "Noto Serif", serif;
+  font-style: italic;
+  font-size: 1.875rem;
+  color: #26170c;
+  margin: 0;
+}
+
+.sectionTitle {
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  font-family: "Manrope", sans-serif;
+  color: #775a19;
+  margin-bottom: 3rem;
+  margin-top: 0;
+}
+
+.bentoGrid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 2rem;
+  margin-bottom: 12rem;
+}
+
+@media (min-width: 768px) {
+  .bentoGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.bentoItem1 {
+  grid-column: span 1;
+  background-color: #f6f3ee;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 400px;
+}
+
+@media (min-width: 768px) {
+  .bentoItem1 {
+    grid-column: span 2;
+  }
+}
+
+.bentoItem2 {
+  grid-column: span 1;
+  background-color: #f0ede8;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.bentoItem3 {
+  grid-column: span 1;
+  background-color: #26170c;
+  color: #ffffff;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.bentoIconPrimary {
+  font-size: 2.25rem;
+  color: #26170c;
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 300,
+    "GRAD" 0,
+    "opsz" 24;
+}
+
+.bentoIconSecondary {
+  font-size: 2.25rem;
+  color: #775a19;
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 300,
+    "GRAD" 0,
+    "opsz" 24;
+}
+
+.bentoTitle {
+  font-size: 1.5rem;
+  font-family: "Noto Serif", serif;
+  margin-bottom: 1rem;
+  margin-top: 0;
+}
+
+.bentoTitleInverse {
+  font-size: 1.5rem;
+  font-family: "Noto Serif", serif;
+  margin-bottom: 1rem;
+  margin-top: 0;
+  color: #fcf9f4;
+}
+
+.bentoText {
+  color: #4f453f;
+  font-size: 0.875rem;
+  line-height: 1.625;
+  margin: 0;
+}
+
+.bentoTextInverse {
+  color: #d2c4bc;
+  font-size: 0.875rem;
+  line-height: 1.625;
+  margin: 0;
+}
+
+.ritualSection {
+  margin-bottom: 12rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.ritualContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4rem;
+}
+
+@media (min-width: 768px) {
+  .ritualContainer {
+    flex-direction: row-reverse;
+  }
+}
+
+.ritualImageWrapper {
+  width: 100%;
+  height: 800px;
+  background-color: #f0ede8;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .ritualImageWrapper {
+    width: 60%;
+  }
+}
+
+.ritualImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.9;
+  mix-blend-mode: multiply;
+  filter: grayscale(100%);
+  transition: all 0.7s ease;
+}
+
+.ritualImage:hover {
+  filter: grayscale(0%);
+}
+
+.ritualContent {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .ritualContent {
+    width: 40%;
+    padding-right: 3rem;
+  }
+}
+
+.ritualTitle {
+  font-size: 3rem;
+  font-family: "Noto Serif", serif;
+  line-height: 1.1;
+  color: #26170c;
+  margin-bottom: 2rem;
+  margin-top: 0;
+}
+
+@media (min-width: 768px) {
+  .ritualTitle {
+    font-size: 4.5rem;
+  }
+}
+
+.ritualQuote {
+  color: #4f453f;
+  margin-bottom: 3rem;
+  font-size: 1.125rem;
+  line-height: 1.625;
+  font-style: italic;
+  margin-top: 0;
+}
+
+.ritualSteps {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  font-family: "Manrope", sans-serif;
+}
+
+.ritualStep {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.stepNumber {
+  color: #775a19;
+  font-family: "Noto Serif", serif;
+  font-style: italic;
+  font-size: 1.5rem;
+}
+
+.stepTitle {
+  font-weight: 700;
+  color: #26170c;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.25rem;
+  margin-top: 0;
+}
+
+.stepText {
+  font-size: 0.875rem;
+  color: #4f453f;
+  margin: 0;
+}
+
+.readMoreBtn {
+  margin-top: 4rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: #775a19;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.arrowForward {
+  transition: transform 0.3s ease;
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 300,
+    "GRAD" 0,
+    "opsz" 24;
+}
+
+.readMoreBtn:hover .arrowForward {
+  transform: translateX(0.5rem);
+}
+
+.aeroSection {
+  margin-bottom: 12rem;
+}
+
+.aeroContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4rem;
+}
+
+@media (min-width: 768px) {
+  .aeroContainer {
+    flex-direction: row;
+  }
+}
+
+.aeroImageContainer {
+  width: 100%;
+  height: 600px;
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .aeroImageContainer {
+    width: 50%;
+  }
+}
+
+.aeroBgOffset {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(119, 90, 25, 0.1);
+  transform: rotate(-3deg) translate(1rem, 1rem);
+}
+
+.aeroImage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.aeroContent {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .aeroContent {
+    width: 50%;
+  }
+}
+
+.aeroGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+}
+
+.aeroDivider {
+  display: block;
+  height: 1px;
+  background-color: #d2c4bc;
+  margin-bottom: 1rem;
+  width: 3rem;
+}
+
+.aeroParamTitle {
+  font-weight: 700;
+  color: #26170c;
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+  margin-top: 0;
+}
+
+.aeroParamText {
+  font-size: 0.75rem;
+  color: #4f453f;
+  margin: 0;
+}
+
+.aeroTip {
+  margin-top: 3rem;
+  padding: 2rem;
+  background-color: #ebe8e3;
+  border-left: 4px solid #775a19;
+}
+
+.aeroTipText {
+  font-size: 0.875rem;
+  line-height: 2;
+  color: #1c1c19;
+  font-family: "Manrope", sans-serif;
+  margin: 0;
+}
+
+.cta {
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.ctaTitle {
+  font-size: 2.25rem;
+  font-family: "Noto Serif", serif;
+  font-style: italic;
+  color: #26170c;
+  margin-bottom: 2rem;
+  margin-top: 0;
+}
+
+@media (min-width: 768px) {
+  .ctaTitle {
+    font-size: 3rem;
+  }
+}
+
+.ctaSubtitle {
+  color: #4f453f;
+  max-width: 28rem;
+  margin-bottom: 3rem;
+  margin-top: 0;
+}
+
+.ctaButtons {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.ctaBtnPrimary {
+  padding: 1rem 3rem;
+  background-color: #26170c;
+  color: #ffffff;
+  border-radius: 0.375rem;
+  font-family: "Manrope", sans-serif;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.ctaBtnPrimary:hover {
+  opacity: 0.9;
+}
+
+.ctaBtnSecondary {
+  padding: 1rem 3rem;
+  color: #775a19;
+  border-radius: 0.375rem;
+  font-family: "Manrope", sans-serif;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  border: 1px solid #775a19;
+  background: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.ctaBtnSecondary:hover {
+  background-color: rgba(119, 90, 25, 0.05);
+}
+
+.footer {
+  width: 100%;
+  padding: 4rem 3rem;
+  border-top: 1px solid rgba(38, 23, 12, 0.05);
+  background-color: #fcf9f4;
+}
+
+@media (prefers-color-scheme: dark) {
+  .footer {
+    background-color: #1a110a;
+  }
+}
+
+.footerContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  max-width: 1536px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 768px) {
+  .footerContainer {
+    flex-direction: row;
+  }
+}
+
+.footerLogo {
+  font-family: "Noto Serif", serif;
+  font-size: 1.25rem;
+  color: #26170c;
+}
+
+@media (prefers-color-scheme: dark) {
+  .footerLogo {
+    color: #fcf9f4;
+  }
+}
+
+.footerLinks {
+  display: flex;
+  gap: 2rem;
+}
+
+.footerLink {
+  font-family: "Manrope", sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(38, 23, 12, 0.6);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+@media (prefers-color-scheme: dark) {
+  .footerLink {
+    color: rgba(252, 249, 244, 0.6);
+  }
+}
+
+.footerLink:hover {
+  color: #775a19;
+}
+
+.footerCopyright {
+  font-family: "Manrope", sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(38, 23, 12, 0.6);
+}
+
+@media (prefers-color-scheme: dark) {
+  .footerCopyright {
+    color: rgba(252, 249, 244, 0.6);
+  }
+}

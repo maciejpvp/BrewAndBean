@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  padding: 2rem;
+  width: 100%;
+}
+
+.itemWrapper {
+  position: relative;
+  cursor: pointer;
+}
+
+.itemText {
+  font-family: "Serif", "Georgia", serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.1rem;
+  color: #3d3428;
+  text-transform: uppercase;
+  margin: 0;
+  padding-bottom: 4px;
+}
+
+.itemTextSelected {
+  color: #4a3f29;
+}
+
+.underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #3d3428;
+}

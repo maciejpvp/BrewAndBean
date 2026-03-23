@@ -1,12 +1,40 @@
-import { Box, Typography } from "@mui/material"
+import { Box, Typography } from "@mui/material";
 
 export const Logo = () => {
     return (
-        <Typography
-            variant="h5"
-            sx={{ fontWeight: 800, letterSpacing: '-0.5px', color: 'primary.main', cursor: 'pointer' }}
+        <Box 
+            component="span" 
+            sx={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                whiteSpace: 'nowrap', 
+                flexShrink: 0         
+            }}
         >
-            BREW <Box component="span" sx={{ color: 'secondary.main', fontWeight: 300 }}>&</Box> BEAN
-        </Typography>
-    )
-}
+            <Typography
+                variant="h5"
+                sx={{ 
+                    fontWeight: 800, 
+                    letterSpacing: '-0.5px', 
+                    color: 'primary.main', 
+                    cursor: 'pointer',
+                    display: 'inherit', 
+                    alignItems: 'center'
+                }}
+            >
+                BREW 
+                <Box 
+                    component="span" 
+                    sx={{ 
+                        color: 'secondary.main', 
+                        fontWeight: 300, 
+                        mx: 0.5 
+                    }}
+                >
+                    &
+                </Box> 
+                BEAN
+            </Typography>
+        </Box>
+    );
+};

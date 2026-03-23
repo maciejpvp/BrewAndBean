@@ -13,6 +13,8 @@ import { ProductPage } from './pages/ProductPage';
 import { CheckoutPage } from './pages/CheckoutPage';
 import { getAuthenticatedUserProfile } from './services/authService';
 import { useUserStore } from './store/useUserStore';
+import OurStoryPage from './pages/OurStoryPage';
+import BrewGuides from './pages/BrewGuides';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -55,6 +57,8 @@ function AppContent() {
                 <Route path="/products" element={<ProductsPage />} />
                 <Route path="/products/:id" element={<ProductPage />} />
                 <Route path="/checkout" element={<CheckoutPage />} />
+                <Route path="/our-story" element={<OurStoryPage />} />
+                <Route path="/brew-guides" element={<BrewGuides />} />
               </Routes>
             </main>
           </>
