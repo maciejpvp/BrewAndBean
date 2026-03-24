@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import coffeeTheme from './theme';
+import { getTheme } from './theme';
 import { Navbar } from './components/navbar/Navbar';
 import { CheckoutNavbar } from './components/navbar/CheckoutNavbar';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
@@ -13,8 +13,10 @@ import { ProductPage } from './pages/ProductPage';
 import { CheckoutPage } from './pages/CheckoutPage';
 import { getAuthenticatedUserProfile } from './services/authService';
 import { useUserStore } from './store/useUserStore';
+import { useThemeStore } from './store/useThemeStore';
 import OurStoryPage from './pages/OurStoryPage';
 import BrewGuides from './pages/BrewGuides';
+import { Footer } from './components/Footer';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -61,6 +63,7 @@ function AppContent() {
                 <Route path="/brew-guides" element={<BrewGuides />} />
               </Routes>
             </main>
+            <Footer />
           </>
         }
       />
@@ -69,10 +72,13 @@ function AppContent() {
 }
 
 export default function App() {
+  const mode = useThemeStore((state) => state.mode);
+  const theme = useMemo(() => getTheme(mode), [mode]);
+
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <ThemeProvider theme={coffeeTheme}>
+        <ThemeProvider theme={theme}>
           <CssBaseline />
           <AppContent />
         </ThemeProvider>

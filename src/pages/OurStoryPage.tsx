@@ -1,5 +1,3 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
 import styles from './OurStoryPage.module.css';
 
 export const OurStoryPage = () => {
@@ -26,9 +24,9 @@ export const OurStoryPage = () => {
                                 className={styles.heroImage} 
                             />
                         </div>
-                        <div className={styles.heroQuoteBox}>
+                        {/* <div className={styles.heroQuoteBox}>
                             <p className={styles.heroQuote}>"The roast is a conversation between the flame and the fruit."</p>
-                        </div>
+                        </div> */}
                     </div>
                 </section>
 
@@ -119,21 +117,6 @@ export const OurStoryPage = () => {
                 </section>
             </main>
 
-            {/* Footer */}
-            <footer className={styles.footer}>
-                <div className={styles.footerContainer}>
-                    <div className={styles.footerInfo}>
-                        <span className={styles.footerLogo}>Brew&amp;Bean</span>
-                        <p className={styles.footerCopyright}>© 2024 Brew&amp;Bean. The Art of the Roast.</p>
-                    </div>
-                    <div className={styles.footerLinks}>
-                        <Link to="#" className={styles.footerLink}>Privacy Policy</Link>
-                        <Link to="#" className={styles.footerLink}>Terms of Service</Link>
-                        <Link to="#" className={styles.footerLink}>Shipping</Link>
-                        <Link to="#" className={styles.footerLink}>Wholesale</Link>
-                    </div>
-                </div>
-            </footer>
         </div>
     );
 };

@@ -16,7 +16,7 @@ export const Logo = () => {
                 sx={{ 
                     fontWeight: 800, 
                     letterSpacing: '-0.5px', 
-                    color: 'primary.main', 
+                    color: (theme) => theme.palette.mode === 'dark' ? 'text.primary' : 'primary.main', 
                     cursor: 'pointer',
                     display: 'inherit', 
                     alignItems: 'center'
@@ -26,7 +26,7 @@ export const Logo = () => {
                 <Box 
                     component="span" 
                     sx={{ 
-                        color: 'secondary.main', 
+                        color: (theme) => theme.palette.mode === 'dark' ? 'text.primary' : 'secondary.main', 
                         fontWeight: 300, 
                         mx: 0.5 
                     }}

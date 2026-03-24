@@ -1,151 +1,179 @@
 import { createTheme } from '@mui/material/styles';
 
-const coffeeTheme = createTheme({
-    palette: {
-        primary: {
-            main: '#171818', // Deep Charcoal
-            light: '#3d3f3f',
-            dark: '#000000',
-            contrastText: '#fbf9f5',
-        },
-        secondary: {
-            main: '#775a19', // Soft Gold
-            light: '#a68233',
-            dark: '#4c3507',
-            contrastText: '#ffffff',
-        },
-        background: {
-            default: '#fbf9f5', // Warm Cream (Surface)
-            paper: '#f3efe6',   // Surface-container-low
-        },
-        text: {
-            primary: '#171818',
-            secondary: '#4b5563',
-        },
-        error: {
-            main: '#d32f2f',
-        },
-    },
-    typography: {
-        fontFamily: '"Manrope", sans-serif',
-        h1: {
-            fontFamily: '"Noto Serif", serif',
-            fontWeight: 800,
-            letterSpacing: '0.05em',
-            color: '#171818',
-        },
-        h2: {
-            fontFamily: '"Noto Serif", serif',
-            fontWeight: 700,
-            color: '#171818',
-        },
-        h3: {
-            fontFamily: '"Noto Serif", serif',
-            fontWeight: 700,
-            color: '#171818',
-        },
-        h4: {
-            fontFamily: '"Noto Serif", serif',
-            fontWeight: 700,
-            color: '#171818',
-        },
-        h5: {
-            fontFamily: '"Noto Serif", serif',
-            fontWeight: 700,
-            color: '#171818',
-        },
-        h6: {
-            fontFamily: '"Noto Serif", serif',
-            fontWeight: 700,
-            color: '#171818',
-        },
-        button: {
-            textTransform: 'none',
-            fontWeight: 600,
-            fontFamily: '"Manrope", sans-serif',
-        },
-    },
-    shape: {
-        borderRadius: 0, // Sharp corners everywhere
-    },
-    components: {
-        MuiButton: {
-            styleOverrides: {
-                root: {
-                    padding: '12px 28px',
-                    boxShadow: 'none',
-                    borderRadius: 0,
-                    '&:hover': {
-                        boxShadow: 'none',
-                    },
-                },
-                containedPrimary: {
-                    backgroundColor: '#171818',
-                    color: '#fbf9f5',
-                    '&:hover': {
-                        backgroundColor: '#3d3f3f', // primary-container simulation
-                    },
-                },
-                outlined: {
-                    border: '1px solid rgba(23, 24, 24, 0.15)', // Ghost border fallback
-                    color: '#171818',
-                    '&:hover': {
-                        backgroundColor: 'rgba(23, 24, 24, 0.04)',
-                        border: '1px solid rgba(23, 24, 24, 0.15)',
-                    },
-                },
-                text: {
-                    color: '#171818',
-                    '&:hover': {
-                        backgroundColor: 'transparent',
-                        textDecoration: 'underline',
-                        textDecorationColor: '#775a19', // Gold underline
-                        textDecorationThickness: '2px',
-                        textUnderlineOffset: '4px',
-                    },
-                },
-            },
-        },
-        MuiCard: {
-            styleOverrides: {
-                root: {
-                    border: 'none',
-                    boxShadow: 'none',
-                    backgroundColor: '#f3efe6', // surface-container-low
-                    borderRadius: 0,
-                },
-            },
-        },
-        MuiOutlinedInput: {
-            styleOverrides: {
-                root: {
-                    borderRadius: 0,
-                    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                        borderBottom: '2px solid #171818',
-                    },
-                },
-                notchedOutline: {
-                    borderTop: 'none',
-                    borderLeft: 'none',
-                    borderRight: 'none',
-                    borderBottom: '1px solid rgba(23, 24, 24, 0.15)',
-                    borderRadius: 0,
-                },
-            },
-        },
-        MuiInputLabel: {
-            styleOverrides: {
-                root: {
-                    fontFamily: '"Manrope", sans-serif',
-                    fontSize: '0.875rem',
-                    color: '#4b5563',
-                    '&.Mui-focused': {
-                        color: '#171818',
-                    },
-                },
-            },
-        },
-    },
-});
+export const getTheme = (mode: 'light' | 'dark') => {
+    const isLight = mode === 'light';
 
-export default coffeeTheme;
+    const primary = '#26170c';
+    const secondary = '#775a19';
+    const background = isLight ? '#fcf9f4' : '#1a110a';
+    const surfaceContainerLow = isLight ? '#f6f3ee' : '#22160d';
+    const surfaceContainerHighest = isLight ? '#e5e2dd' : '#3d2819';
+    const surfaceVariant = isLight ? '#e5e2dd' : '#3d2819';
+    const outlineVariant = isLight ? '#d2c4bc' : '#574335';
+
+    const textPrimary = isLight ? '#1c1c19' : '#fcf9f4';
+    const textSecondary = isLight ? '#4f453f' : '#d2c4bc';
+    const textOnPrimary = '#ffffff';
+
+    return createTheme({
+        palette: {
+            mode,
+            primary: {
+                main: primary,
+                contrastText: textOnPrimary,
+            },
+            secondary: {
+                main: secondary,
+                contrastText: '#ffffff',
+            },
+            background: {
+                default: background,
+                paper: surfaceContainerLow,
+            },
+            text: {
+                primary: textPrimary,
+                secondary: textSecondary,
+            },
+            divider: outlineVariant,
+        },
+        typography: {
+            fontFamily: '"Manrope", sans-serif',
+            h1: {
+                fontFamily: '"Noto Serif", serif',
+                fontWeight: 400, // Reduced weight for elegant editorial feel
+                letterSpacing: '0.05em', // Wide tracking
+                color: textPrimary,
+            },
+            h2: {
+                fontFamily: '"Noto Serif", serif',
+                fontWeight: 400,
+                color: textPrimary,
+            },
+            h3: {
+                fontFamily: '"Noto Serif", serif',
+                fontWeight: 400,
+                color: textPrimary,
+            },
+            h4: {
+                fontFamily: '"Noto Serif", serif',
+                fontWeight: 400,
+                color: textPrimary,
+            },
+            h5: {
+                fontFamily: '"Noto Serif", serif',
+                fontWeight: 700,
+                color: textPrimary,
+            },
+            h6: {
+                fontFamily: '"Noto Serif", serif',
+                fontWeight: 700,
+                color: textPrimary,
+            },
+            button: {
+                textTransform: 'none',
+                fontWeight: 600,
+                fontFamily: '"Manrope", sans-serif',
+            },
+        },
+        shape: {
+            borderRadius: 6, // 0.375rem corresponding roughly to rounded-md
+        },
+        components: {
+            MuiButton: {
+                styleOverrides: {
+                    root: {
+                        padding: '12px 28px',
+                        boxShadow: 'none',
+                        textTransform: 'uppercase', // Following the boutique feel
+                        letterSpacing: '0.1em',
+                        '&:hover': {
+                            boxShadow: 'none',
+                        },
+                    },
+                    containedPrimary: {
+                        backgroundColor: primary,
+                        color: textOnPrimary,
+                        '&:hover': {
+                            backgroundColor: '#3d2b1f', // Primary container simulation
+                        },
+                    },
+                    containedSecondary: {
+                        backgroundColor: secondary,
+                        color: '#ffffff',
+                        background: `linear-gradient(135deg, ${secondary} 0%, #a68233 100%)`, // Signature CTA gradient
+                        '&:hover': {
+                            opacity: 0.9,
+                        },
+                    },
+                    outlined: {
+                        border: 'none',
+                        color: secondary,
+                        '&:hover': {
+                            backgroundColor: 'transparent',
+                            color: '#a68233',
+                            border: 'none',
+                        },
+                    },
+                    text: {
+                        color: secondary,
+                        '&:hover': {
+                            backgroundColor: 'transparent',
+                            textDecoration: 'none',
+                            opacity: 0.8,
+                        },
+                    },
+                },
+            },
+            MuiCard: {
+                styleOverrides: {
+                    root: {
+                        border: 'none',
+                        boxShadow: 'none',
+                        backgroundColor: surfaceContainerLow,
+                        padding: '1.25rem', // Spacing Scale 5
+                    },
+                },
+            },
+            MuiOutlinedInput: {
+                styleOverrides: {
+                    root: {
+                        backgroundColor: surfaceVariant,
+                        borderRadius: '4px', // rounded-sm
+                        transition: 'background-color 0.2s',
+                        '&.Mui-focused': {
+                            backgroundColor: surfaceContainerHighest,
+                        },
+                        '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                            border: 'none', // No bottom line or box focus outline per design
+                        },
+                    },
+                    notchedOutline: {
+                        border: 'none', // The Minimalist Input: No line or box
+                    },
+                    input: {
+                        padding: '12px 16px',
+                    }
+                },
+            },
+            MuiInputLabel: {
+                styleOverrides: {
+                    root: {
+                        fontFamily: '"Manrope", sans-serif',
+                        fontSize: '0.875rem',
+                        color: textSecondary,
+                        '&.Mui-focused': {
+                            color: textPrimary,
+                        },
+                    },
+                },
+            },
+            MuiDivider: {
+                styleOverrides: {
+                    root: {
+                        display: 'none', // The Divider Forfeit: Forbid the use of horizontal rules
+                    }
+                }
+            },
+        },
+    });
+};
