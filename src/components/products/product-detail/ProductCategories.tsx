@@ -1,13 +1,15 @@
 import React from 'react';
 import { Box, Tabs, Tab } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 interface EquipmentCategoriesProps {
     currentTab: number;
     onTabChange: (event: React.SyntheticEvent, newValue: number) => void;
     categories?: { label: string, slug: string }[];
+    basePath: string;
 }
 
-export const EquipmentCategories = ({ currentTab, onTabChange, categories }: EquipmentCategoriesProps) => {
+export const EquipmentCategories = ({ currentTab, onTabChange, categories, basePath }: EquipmentCategoriesProps) => {
     const defaultCategories = [
         { label: "All Equipment", slug: "equipment" },
         { label: "V60", slug: "v60" },
@@ -17,6 +19,12 @@ export const EquipmentCategories = ({ currentTab, onTabChange, categories }: Equ
         { label: "Grinders", slug: "grinders" }
     ];
     const displayCategories = categories || defaultCategories;
+
+    const navigate = useNavigate();
+
+    const handleTabChange = (value: string) => {
+        navigate(`/${basePath}?category=${value}`)
+    }
 
     return (
         <Box 
@@ -53,7 +61,7 @@ export const EquipmentCategories = ({ currentTab, onTabChange, categories }: Equ
                 }}
             >
                 {displayCategories.map((cat, index) => (
-                    <Tab key={index} label={cat.label} />
+                    <Tab key={index} label={cat.label} onClick={() => handleTabChange(cat.slug)} />
                 ))}
             </Tabs>
         </Box>

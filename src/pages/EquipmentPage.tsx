@@ -4,6 +4,8 @@ import { ProductList } from '../components/products/ProductList';
 import { MOCK_DATA } from '../components/equipment/equipmentData';
 import { EquipmentHero } from '../components/equipment/EquipmentHero';
 import { EquipmentCategories } from '../components/products/product-detail/ProductCategories';
+import { useLocation } from 'react-router-dom';
+import { setInitialTab } from '../utils/setInitialTab';
 
 const CATEGORIES = [
     { label: "All Equipment", slug: "equipment" },
@@ -15,7 +17,10 @@ const CATEGORIES = [
 ];
 
 export const EquipmentPage = () => {
-    const [currentTab, setCurrentTab] = useState(0);
+    const location = useLocation();
+
+    const slugs = CATEGORIES.map((cat) => cat.slug);
+    const [currentTab, setCurrentTab] = useState(setInitialTab(location, slugs));
 
     const handleTabChange = (_: React.SyntheticEvent, newValue: number) => {
         setCurrentTab(newValue);
@@ -25,7 +30,12 @@ export const EquipmentPage = () => {
         <Box component="main">
             <Container maxWidth="xl" sx={{ px: { xs: 3, md: 6 } }}>
                 <EquipmentHero />
-                <EquipmentCategories currentTab={currentTab} onTabChange={handleTabChange} categories={CATEGORIES} />
+                <EquipmentCategories 
+                    basePath="equipment" 
+                    currentTab={currentTab} 
+                    onTabChange={handleTabChange} 
+                    categories={CATEGORIES} 
+                />
                 
                 <Box sx={{ pb: 16 }}>
                     <ProductList products={MOCK_DATA} categoryLabel={CATEGORIES[currentTab].label} />

@@ -3,6 +3,8 @@ import { Box, Container } from '@mui/material';
 import { ProductList } from '../components/products/ProductList';
 import { RoastsHero } from '../components/roasts/RoastsHero';
 import { EquipmentCategories } from '../components/products/product-detail/ProductCategories';
+import { useLocation } from 'react-router-dom';
+import { setInitialTab } from '../utils/setInitialTab';
 
 const ROAST_CATEGORIES_MAP = [
     { label: "All Coffee", slug: "coffee" },
@@ -13,7 +15,10 @@ const ROAST_CATEGORIES_MAP = [
 ];
 
 export const RoastsPage = () => {
-    const [currentTab, setCurrentTab] = useState(0);
+    const location = useLocation();
+
+    const slugs = ROAST_CATEGORIES_MAP.map((cat) => cat.slug);
+    const [currentTab, setCurrentTab] = useState(setInitialTab(location, slugs));
 
     const handleTabChange = (_: React.SyntheticEvent, newValue: number) => {
         setCurrentTab(newValue);
@@ -30,6 +35,7 @@ export const RoastsPage = () => {
                     currentTab={currentTab} 
                     onTabChange={handleTabChange} 
                     categories={ROAST_CATEGORIES_MAP}
+                    basePath="roasts"
                 />
                 
                 <Box sx={{ pb: 16 }}>
