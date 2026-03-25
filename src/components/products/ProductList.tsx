@@ -10,16 +10,17 @@ interface ProductListProps {
     category?: string;
     categoryLabel?: string;
     products?: Product[];
+    isLoading?: boolean;
 }
 
 const SKELETON_COUNT = 8;
 
-export const ProductList = ({ category = '', categoryLabel, products: propProducts }: ProductListProps) => {
+export const ProductList = ({ category = '', categoryLabel, products: propProducts, isLoading: propIsLoading }: ProductListProps) => {
     const navigate = useNavigate();
     const { data: fetchedProducts, isLoading: isFetching, isError: isFetchError, error: fetchError, refetch } = useProductsByCategory(propProducts ? null : category);
 
     const products = propProducts || fetchedProducts;
-    const isLoading = !propProducts && isFetching;
+    const isLoading = propIsLoading || (!propProducts && isFetching);
     const isError = !propProducts && isFetchError;
     const error = fetchError;
 
@@ -42,7 +43,7 @@ export const ProductList = ({ category = '', categoryLabel, products: propProduc
                 >
                     {categoryLabel ?? category.replace(/-/g, ' ')}
                 </Typography>
-                {!isLoading && !isError && products && (
+                {!isLoading && !isError && products && products.length > 0 && (
                     <Typography variant="body2" sx={{ color: 'text.secondary', mt: 0.5 }}>
                         {products.length} {products.length === 1 ? 'product' : 'products'}
                     </Typography>

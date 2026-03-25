@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Box, Container } from '@mui/material';
 import { ProductList } from '../components/products/ProductList';
-import { MOCK_DATA } from '../components/equipment/equipmentData';
 import { EquipmentHero } from '../components/equipment/EquipmentHero';
 import { EquipmentCategories } from '../components/products/product-detail/ProductCategories';
 import { useLocation } from 'react-router-dom';
 import { setInitialTab } from '../utils/setInitialTab';
+import { useProduct } from '../hooks/useProduct';
+import { useProductsByCategory } from '../hooks/useProductsByCategory';
 
 const CATEGORIES = [
     { label: "All Equipment", slug: "equipment" },
@@ -26,6 +27,10 @@ export const EquipmentPage = () => {
         setCurrentTab(newValue);
     };
 
+    const { data: products, isLoading } = useProductsByCategory(slugs[currentTab]);
+
+    console.log(products);
+
     return (
         <Box component="main">
             <Container maxWidth="xl" sx={{ px: { xs: 3, md: 6 } }}>
@@ -38,7 +43,11 @@ export const EquipmentPage = () => {
                 />
                 
                 <Box sx={{ pb: 16 }}>
-                    <ProductList products={MOCK_DATA} categoryLabel={CATEGORIES[currentTab].label} />
+                    <ProductList 
+                        products={products || []} 
+                        categoryLabel={CATEGORIES[currentTab].label} 
+                        isLoading={isLoading}
+                    />
                 </Box>
 
             </Container>
