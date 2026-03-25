@@ -8,15 +8,16 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { LoginPage } from './pages/LoginPage';
-import { ProductsPage } from './pages/ProductsPage';
 import { ProductPage } from './pages/ProductPage';
 import { CheckoutPage } from './pages/CheckoutPage';
+import { EquipmentPage } from './pages/EquipmentPage';
 import { getAuthenticatedUserProfile } from './services/authService';
 import { useUserStore } from './store/useUserStore';
 import { useThemeStore } from './store/useThemeStore';
 import OurStoryPage from './pages/OurStoryPage';
 import BrewGuides from './pages/BrewGuides';
 import { Footer } from './components/Footer';
+import RoastsPage from './pages/RoastsPage';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -56,11 +57,12 @@ function AppContent() {
             </nav>
             <main>
               <Routes>
-                <Route path="/products" element={<ProductsPage />} />
-                <Route path="/products/:id" element={<ProductPage />} />
+                <Route path="/product/:id" element={<ProductPage />} />
                 <Route path="/checkout" element={<CheckoutPage />} />
                 <Route path="/our-story" element={<OurStoryPage />} />
                 <Route path="/brew-guides" element={<BrewGuides />} />
+                <Route path="/equipment" element={<EquipmentPage />} />
+                <Route path="/roasts" element={<RoastsPage />} />
               </Routes>
             </main>
             <Footer />

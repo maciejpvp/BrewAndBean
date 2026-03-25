@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import CategoriesItem from './CategoriesItem';
 import styles from './Categories.module.css';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavbarContext } from './NavbarContext';
 
 const navItems = [{
   label: "OUR ROASTS",
@@ -19,7 +20,19 @@ const navItems = [{
 
 const Categories: React.FC = () => {
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState(navItems[0]);
+  const location = useLocation();
+  const { isScrolled } = useNavbarContext();
+
+  const pathname = location.pathname;
+
+  const getActiveTab = () => {
+    return navItems.find((item) => item.path === pathname);
+  };
+
+  const [activeTab, setActiveTab] = useState(() => {
+    console.log(getActiveTab());
+    return getActiveTab();
+  });
 
   const handleClick = (item: { label: string; path: string }) => {
     setActiveTab(item);
@@ -27,7 +40,14 @@ const Categories: React.FC = () => {
   };
 
   return (
-    <nav className={styles.container}>
+    <nav 
+      className={styles.container}
+      style={{
+        paddingTop: isScrolled ? 0 : '1rem',
+        paddingBottom: isScrolled ? 0 : '1rem',
+        transition: 'padding 0.3s ease-in-out'
+      }}
+    >
       {navItems.map((item) => (
         <CategoriesItem
           key={item.label}

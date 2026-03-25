@@ -3,8 +3,6 @@ import styles from './BrewGuides.module.css';
 export const BrewGuides = () => {
     return (
         <div className={styles.page}>
-            <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
-
             <main className={styles.main}>
                 {/* Hero Section */}
                 <header className={styles.hero}>

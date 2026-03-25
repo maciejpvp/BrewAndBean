@@ -3,8 +3,6 @@ import styles from './OurStoryPage.module.css';
 export const OurStoryPage = () => {
     return (
         <div className={styles.page}>
-            <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
-            
             <main className={styles.main}>
                 <section className={`${styles.heroSection} ${styles.editorialGrid}`}>
                     <div className={styles.heroContent}>
@@ -24,9 +22,6 @@ export const OurStoryPage = () => {
                                 className={styles.heroImage} 
                             />
                         </div>
-                        {/* <div className={styles.heroQuoteBox}>
-                            <p className={styles.heroQuote}>"The roast is a conversation between the flame and the fruit."</p>
-                        </div> */}
                     </div>
                 </section>
 

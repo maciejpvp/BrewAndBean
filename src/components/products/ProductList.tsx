@@ -4,16 +4,24 @@ import { ProductItem, ProductItemSkeleton } from './ProductItem';
 import { useProductsByCategory } from '../../hooks/useProductsByCategory';
 import { getProductId } from '../../types/product';
 
+import type { Product } from '../../types/product';
+
 interface ProductListProps {
-    category: string;
+    category?: string;
     categoryLabel?: string;
+    products?: Product[];
 }
 
 const SKELETON_COUNT = 8;
 
-export const ProductList = ({ category, categoryLabel }: ProductListProps) => {
+export const ProductList = ({ category = '', categoryLabel, products: propProducts }: ProductListProps) => {
     const navigate = useNavigate();
-    const { data: products, isLoading, isError, error, refetch } = useProductsByCategory(category);
+    const { data: fetchedProducts, isLoading: isFetching, isError: isFetchError, error: fetchError, refetch } = useProductsByCategory(propProducts ? null : category);
+
+    const products = propProducts || fetchedProducts;
+    const isLoading = !propProducts && isFetching;
+    const isError = !propProducts && isFetchError;
+    const error = fetchError;
 
     const handleProductClick = (id: string) => {
         navigate(`/products/${id}`);

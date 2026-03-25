@@ -27,5 +27,9 @@ export const getProductImageUrl = (
     baseUrl = 'https://d17q0wnd7fgmqz.cloudfront.net/cdn/',
 ): string | null => {
     const main = media.find((m) => m.isMain) ?? media[0];
-    return main ? `${baseUrl}${main.key}` : null;
+    if (!main) return null;
+    if (main.key.startsWith('http://') || main.key.startsWith('https://')) {
+        return main.key;
+    }
+    return `${baseUrl}${main.key}`;
 };
