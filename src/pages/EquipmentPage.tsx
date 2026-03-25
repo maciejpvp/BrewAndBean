@@ -5,7 +5,6 @@ import { EquipmentHero } from '../components/equipment/EquipmentHero';
 import { EquipmentCategories } from '../components/products/product-detail/ProductCategories';
 import { useLocation } from 'react-router-dom';
 import { setInitialTab } from '../utils/setInitialTab';
-import { useProduct } from '../hooks/useProduct';
 import { useProductsByCategory } from '../hooks/useProductsByCategory';
 
 const CATEGORIES = [

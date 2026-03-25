@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import { ShoppingBagOutlined } from '@mui/icons-material';
 import type { Product } from '../../types/product';
-import { getProductId, getProductImageUrl } from '../../types/product';
+import { getProductImageUrl } from '../../types/product';
 
 interface ProductItemProps {
     product: Product;
@@ -18,7 +18,7 @@ interface ProductItemProps {
 }
 
 export const ProductItem = ({ product, onClick }: ProductItemProps) => {
-    const id = getProductId(product);
+    const id = product.id;
     const imageUrl = getProductImageUrl(product.media);
     const isOutOfStock = product.stock === 0;
 

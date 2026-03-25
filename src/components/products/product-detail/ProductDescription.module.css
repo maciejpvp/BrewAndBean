@@ -1,0 +1,35 @@
+.descriptionWrapper {
+  grid-column: span 5 / span 5;
+}
+
+@media (max-width: 1024px) {
+  .descriptionWrapper {
+    grid-column: span 1 / span 1;
+  }
+}
+
+.title {
+  font-family: "Noto Serif", serif;
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  margin-bottom: 2rem;
+  font-style: italic;
+  font-weight: 400;
+  margin-top: 0;
+}
+
+.textContainer {
+  font-family: "Manrope", sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.625;
+  color: rgba(38, 23, 12, 0.8);
+}
+
+.textContainer p {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
+.textContainer p:last-child {
+  margin-bottom: 0;
+}

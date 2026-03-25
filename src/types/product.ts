@@ -5,21 +5,24 @@ export interface ProductMedia {
 }
 
 export interface Product {
-    PK: string;            // e.g. "PRODUCT#<uuid>"
-    SK: string;            // e.g. "METADATA"
+    id: string;
     name: string;
+    subtitle?: string;
     description: string;
     price: number;
     stock: number;
     media: ProductMedia[];
     categories: {name: string, slug: string}[];
+    tech_spec: {label: string, value: string}[];
+    attributes: {
+        roastLevel?: string;
+        roastPercent?: number;
+        profile?: string;
+        weight?: string;
+    };
     version: number;
     created_at: number;
 }
-
-// Convenience getter for the product's UUID
-export const getProductId = (product: Product): string =>
-    product.PK.replace('PRODUCT#', '');
 
 // Build the CDN image URL from a media key
 export const getProductImageUrl = (

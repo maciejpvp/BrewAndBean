@@ -2,7 +2,6 @@ import { Box, Grid, Typography, Alert, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { ProductItem, ProductItemSkeleton } from './ProductItem';
 import { useProductsByCategory } from '../../hooks/useProductsByCategory';
-import { getProductId } from '../../types/product';
 
 import type { Product } from '../../types/product';
 
@@ -92,7 +91,7 @@ export const ProductList = ({ category = '', categoryLabel, products: propProduc
                         </Grid>
                     ))
                     : products?.map((product) => (
-                        <Grid key={getProductId(product)} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
+                        <Grid key={product.id} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                             <ProductItem product={product} onClick={handleProductClick} />
                         </Grid>
                     ))}
