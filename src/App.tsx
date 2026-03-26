@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { getTheme } from './theme';
@@ -18,6 +18,8 @@ import OurStoryPage from './pages/OurStoryPage';
 import BrewGuides from './pages/BrewGuides';
 import { Footer } from './components/Footer';
 import RoastsPage from './pages/RoastsPage';
+import { AdminDashboard } from './pages/AdminDashboard';
+import { ProtectedRoute } from './utils/ProtectedRoute';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -32,6 +34,7 @@ function AppContent() {
   const { setUser, clearUser } = useUserStore();
   const location = useLocation();
   const isCheckout = location.pathname === '/checkout';
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getAuthenticatedUserProfile()
@@ -39,13 +42,18 @@ function AppContent() {
         if (profile) setUser(profile);
         else clearUser();
       })
-      .catch(() => clearUser());
+      .catch(() => clearUser())
+      .finally(() => setLoading(false));
   }, [setUser, clearUser]);
 
   return (
     <Routes>
       {/* Auth routes — no navbar */}
       <Route path="/login" element={<LoginPage />} />
+
+      <Route element={<ProtectedRoute requiredGroup="admin" isLoading={loading} />}>
+        <Route path="/admin" element={<AdminDashboard />} />
+      </Route>
 
       {/* Main app routes — with navbar */}
       <Route

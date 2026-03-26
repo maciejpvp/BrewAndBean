@@ -13,8 +13,8 @@ export interface Product {
     stock: number;
     media: ProductMedia[];
     categories: {name: string, slug: string}[];
-    tech_spec: {label: string, value: string}[];
-    attributes: {
+    tech_spec?: {label: string, value: string}[];
+    attributes?: {
         roastLevel?: string;
         roastPercent?: number;
         profile?: string;

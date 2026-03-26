@@ -24,7 +24,7 @@ export const ProductList = ({ category = '', categoryLabel, products: propProduc
     const error = fetchError;
 
     const handleProductClick = (id: string) => {
-        navigate(`/products/${id}`);
+        navigate(`/product/${id}`);
     };
 
     return (

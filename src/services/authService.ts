@@ -3,6 +3,8 @@ import {
     signOut,
     getCurrentUser,
     fetchUserAttributes,
+    fetchAuthSession,
+    type AuthSession,
 } from 'aws-amplify/auth';
 
 export interface UserProfile {
@@ -12,6 +14,7 @@ export interface UserProfile {
     phone: string;
     firstName: string;
     lastName: string;
+    groups: string[];
 }
 
 export async function authLogin(username: string, password: string): Promise<void> {
@@ -30,6 +33,10 @@ export async function getAuthenticatedUserProfile(): Promise<UserProfile | null>
         const { userId, username } = await getCurrentUser();
         const attrs = await fetchUserAttributes();
 
+        const session = await fetchAuthSession();
+
+        const groups = extractCognitoGroups(session);
+
         return {
             userId,
             username,
@@ -37,9 +44,15 @@ export async function getAuthenticatedUserProfile(): Promise<UserProfile | null>
             phone: attrs.phone_number ?? '',
             firstName: attrs.given_name ?? '',
             lastName: attrs.family_name ?? '',
+            groups,  
         };
     } catch {
         // Not signed in
         return null;
     }
+}
+
+const extractCognitoGroups = (session: AuthSession) => {
+    const groups = session.tokens?.idToken?.payload['cognito:groups'] as string[];
+    return groups ?? [];
 }

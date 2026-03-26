@@ -9,6 +9,7 @@ export interface UserState {
     phone: string;
     firstName: string;
     lastName: string;
+    groups: string[];
 }
 
 interface UserActions {
@@ -24,6 +25,7 @@ const initialState: UserState = {
     phone: '',
     firstName: '',
     lastName: '',
+    groups: [],
 };
 
 export const useUserStore = create<UserState & UserActions>()(
@@ -53,6 +55,7 @@ export const useUserStore = create<UserState & UserActions>()(
                     phone: state.phone,
                     firstName: state.firstName,
                     lastName: state.lastName,
+                    groups: state.groups,
                 }),
             },
         ),
