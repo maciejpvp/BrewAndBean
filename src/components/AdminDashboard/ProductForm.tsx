@@ -43,19 +43,20 @@ interface CreateProductResponse {
 
 export default function ProductForm() {
   const [formData, setFormData] = useState<ProductFormData>({
-    name: "Ethiopian Yirgacheffe",
-    description: "Hidden within the high-altitude Gedeo Zone, our Yirgacheffe Micro Batch represents the pinnacle of Ethiopian coffee heritage...",
+    name: "Bialetti Moka Express",
+    description: "The original stovetop espresso maker, serving up authentic Italian coffee since 1933. Crafted from high-quality polished aluminum with its iconic octagonal shape for perfect heat diffusion.",
     tech_spec: [
-      { label: "Roast Level", value: "Medium-Light" },
-      { label: "Process", value: "Washed / Sun-dried" }
+      { label: "Material", value: "Food-grade Aluminum" },
+      { label: "Capacity", value: "3-Cup (6.5 oz)" },
+      { label: "Origin", value: "Made in Italy" }
     ],
     attributes: [
-      { key: "Aroma", value: "Floral & Jasmine" },
-      { key: "Acidity", value: "Vibrant Citric" }
+      { key: "Compatibility", value: "Gas, Electric, Ceramic" },
+      { key: "Maintenance", value: "Hand Wash Only" }
     ],
-    stock: "50000",
-    price: "28.00",
-    categories: ["Single Origin", "Light Roast", "Specialty"],
+    stock: "150",
+    price: "35.00",
+    categories: ["equipment"],
   });
 
   const [tagInput, setTagInput] = useState("");

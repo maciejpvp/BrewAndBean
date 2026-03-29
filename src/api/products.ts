@@ -3,6 +3,7 @@ import type { Product } from '../types/product';
 
 interface ProductsByCategoryResponse {
     products: Product[][];
+    nextToken?: string;
 }
 
 interface ProductByIdResponse {
@@ -13,11 +14,14 @@ interface ProductByIdResponse {
  * Fetch all products belonging to a category slug.
  * The API returns a nested array — we flatten one level.
  */
-export const fetchProductsByCategory = async (category: string): Promise<Product[]> => {
+export const fetchProductsByCategory = async (category: string, limit?: number, nextToken?: string): Promise<{ products: Product[], nextToken?: string }> => {
     const { data } = await apiClient.get<ProductsByCategoryResponse>(
-        `/products/category/${category}`,
+        `/products/category/${category}?limit=${limit ?? 10}${nextToken ? `&nextToken=${nextToken}` : ''}`,
     );
-    return data.products.flat();
+    return {
+        products: data.products.flat(),
+        nextToken: data.nextToken,
+    };
 };
 
 /**

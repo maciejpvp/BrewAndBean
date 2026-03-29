@@ -1,0 +1,218 @@
+.container {
+  --primary: #26170c;
+  --secondary: #775a19;
+  --surface: #fcf9f4;
+  --surface-low: #f6f3ee;
+  --surface-variant: #e5e2dd;
+  --text-main: #1c1c19;
+  --text-muted: #4f453f;
+
+  padding: 4rem;
+  background-color: var(--surface);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 4rem;
+}
+
+.pageTitle {
+  font-family: "Noto Serif", serif;
+  font-size: 3.5rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: var(--primary);
+  margin: 0;
+  line-height: 1;
+}
+
+.primaryButton {
+  background: linear-gradient(135deg, var(--primary) 0%, #3d2b1f 100%);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 24px rgba(38, 23, 12, 0.04);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.primaryButton:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.tableContainer {
+  background-color: var(--surface-low);
+  border-radius: 6px;
+  padding: 2.75rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.tableHeader {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1fr 1fr 1fr;
+  padding-bottom: 1.5rem;
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+  padding-right: 0.75rem;
+}
+
+.tableContainerList {
+  display: flex;
+  flex-direction: column;
+  gap: 2.75rem;
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
+  padding-right: 0.5rem;
+}
+
+.tableContainerList::-webkit-scrollbar {
+  width: 4px;
+}
+.tableContainerList::-webkit-scrollbar-track {
+  background: transparent;
+}
+.tableContainerList::-webkit-scrollbar-thumb {
+  background: rgba(38, 23, 12, 0.1);
+  border-radius: 4px;
+}
+.tableContainerList::-webkit-scrollbar-thumb:hover {
+  background: rgba(38, 23, 12, 0.25);
+}
+
+.tableRow {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1fr 1fr 1fr;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  margin: 0 -1.5rem;
+  border-radius: 6px;
+  background-color: transparent;
+  transition: background-color 0.3s ease;
+}
+
+.tableRow:hover {
+  background-color: rgba(38, 23, 12, 0.03);
+}
+
+.productCell {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.productImage {
+  width: 48px;
+  height: 48px;
+  border-radius: 4px;
+  object-fit: cover;
+  background-color: var(--surface-variant);
+}
+
+.productName {
+  font-family: "Noto Serif", serif;
+  font-size: 1.5rem;
+  color: var(--primary);
+  margin: 0;
+  white-space: nowrap;
+  font-weight: 400;
+}
+
+.badge {
+  display: inline-flex;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  background-color: var(--surface-variant);
+  color: var(--text-muted);
+  font-family: "Manrope", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.price {
+  font-family: "Noto Serif", serif;
+  font-size: 1.25rem;
+  color: var(--primary);
+}
+
+.stockCell {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.stockDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.stockDot.green {
+  background-color: #4caf50;
+}
+.stockDot.yellow {
+  background-color: #ffb300;
+}
+.stockDot.red {
+  background-color: #e53935;
+}
+
+.actionsCell {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.actionBtn {
+  background: transparent;
+  border: none;
+  color: var(--secondary);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    opacity 0.2s,
+    background-color 0.2s;
+}
+
+.actionBtn:hover {
+  background-color: rgba(119, 90, 25, 0.08);
+  opacity: 0.8;
+}
+
+.actionIcon {
+  font-size: 1.25rem;
+}

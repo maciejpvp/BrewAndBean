@@ -1,4 +1,6 @@
 import { Navigate, Outlet } from 'react-router-dom';
+import { getUser } from './getUser';
+import { LoadingPage } from '../pages/LoadingPage';
 
 interface ProtectedRouteProps {
     requiredGroup?: string;
@@ -6,11 +8,9 @@ interface ProtectedRouteProps {
 }
 
 export const ProtectedRoute = ({ requiredGroup, isLoading }: ProtectedRouteProps) => {
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <LoadingPage />;
 
-  const obj = localStorage.getItem('brew-and-bean-user');
-
-  const user = JSON.parse(obj || '{}').state;
+  const user = getUser();
   const groups = user.groups;
 
   if (!user) {
