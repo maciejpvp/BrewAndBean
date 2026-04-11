@@ -1,6 +1,6 @@
 import React from 'react';
-import styles from '../ProductForm.module.css';
-import type { TechSpec } from '../ProductForm';
+import styles from '../AddProductForm.module.css';
+import type { TechSpec } from '../AddAddProductForm';
 
 interface Props {
   techSpecs: TechSpec[];

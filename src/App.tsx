@@ -5,7 +5,7 @@ import { Box, CircularProgress } from '@mui/material';
 import { getTheme } from './theme';
 import { Navbar } from './components/navbar/Navbar';
 import { CheckoutNavbar } from './components/navbar/CheckoutNavbar';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { getAuthenticatedUserProfile } from './services/authService';
@@ -22,7 +22,7 @@ const OurStoryPage = lazy(() => import('./pages/OurStoryPage'));
 const BrewGuides = lazy(() => import('./pages/BrewGuides'));
 const RoastsPage = lazy(() => import('./pages/RoastsPage'));
 const AdminDashboard = lazy(() => import('./pages/AdminDashboard').then(m => ({ default: m.AdminDashboard })));
-const ProductForm = lazy(() => import('./components/AdminDashboard/ProductForm'));
+const AddProductForm = lazy(() => import('./components/AdminDashboard/AddProductForm'));
 const InventoryPage = lazy(() => import('./pages/Dashboard/Inventory').then(m => ({ default: m.InventoryPage })));
 
 const queryClient = new QueryClient({
@@ -64,8 +64,12 @@ function AppContent() {
 
         <Route element={<ProtectedRoute requiredGroup="admin" isLoading={loading} />}>
           <Route path="/dashboard" element={<AdminDashboard />}>
+            <Route index element={<Navigate to="inventory" replace />} />
+
             <Route path="inventory" element={<InventoryPage />} />
-            <Route path="inventory/new" element={<ProductForm />} />
+            <Route path="inventory/new" element={<AddProductForm />} />
+
+            <Route path="*" element={<Navigate to="/dashboard/inventory" replace />} />
           </Route>
         </Route>
 

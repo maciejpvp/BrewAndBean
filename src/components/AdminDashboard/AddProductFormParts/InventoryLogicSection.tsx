@@ -1,5 +1,5 @@
 import React, { type ChangeEvent } from 'react';
-import styles from '../ProductForm.module.css';
+import styles from '../AddProductForm.module.css';
 
 interface Props {
   price: string;
@@ -28,7 +28,7 @@ export const InventoryLogicSection: React.FC<Props> = ({ price, stock, handleInp
           </div>
         </div>
         <div className={styles.inputGroup}>
-          <label className={styles.label}>Available Stock (Grams)</label>
+          <label className={styles.label}>Available Stock</label>
           <input 
             className={styles.editorialInput} 
             type="number" 

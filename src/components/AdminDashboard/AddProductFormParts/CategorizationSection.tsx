@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../ProductForm.module.css';
+import styles from '../AddProductForm.module.css';
 
 interface Props {
   categories: string[];

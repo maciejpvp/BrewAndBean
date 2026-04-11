@@ -1,3 +1,4 @@
+import { useState, useMemo, useEffect, useRef } from 'react';
 import { DataGrid, type GridColDef, type GridRenderCellParams } from '@mui/x-data-grid';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
@@ -7,6 +8,7 @@ import styles from './Inventory.module.css';
 import { CDN_URL } from '../../../lib/apiClient';
 import { Chip } from '@mui/material';
 import type { StockStatus } from './types';
+import { AddStockModal } from '../../../components/AdminDashboard/Inventory/AddStockModal';
 
 interface InventoryTableProps {
     items: Product[];
@@ -16,7 +18,7 @@ interface InventoryTableProps {
     onPaginationModelChange?: (model: { page: number; pageSize: number }) => void;
 }
 
-const columns: GridColDef<Product>[] = [
+const getColumns = (onEditClick: (product: Product) => void): GridColDef<Product>[] => [
     {
         field: 'name',
         headerName: 'Product',
@@ -97,21 +99,32 @@ let color: StockStatus = "green";
         field: 'actions',
         headerName: 'Actions',
         flex: 1,
-        headerAlign: 'right',
-        align: 'right',
+        headerAlign: 'left',
+        align: 'left',
         sortable: false,
-        renderCell: () => (
+        renderCell: (params: GridRenderCellParams<Product>) => (
             <div className={styles.actionsCell}>
-                <button className={styles.actionBtn} aria-label="Edit">
+                <button onClick={() => onEditClick(params.row)} className={styles.actionBtn} aria-label="Edit">
                     <EditIcon className={styles.actionIcon} />
                 </button>
-                <button className={styles.actionBtn} aria-label="Delete">
+                <button onClick={() => console.log('Delete')} className={styles.actionBtn} aria-label="Delete">
                     <DeleteOutlineIcon className={styles.actionIcon} />
                 </button>
             </div>
         ),
     },
 ];
+
+const calculatePageSize = (dataGridHeight: number, itemHeight: number) => {
+    const headerHeight = 48; // DataGrid columnHeaderHeight
+    const footerHeight = 56; // DataGrid default footer height
+    const buffer = 40;
+    const availableHeight = dataGridHeight - headerHeight - footerHeight - buffer;
+    console.log('availableHeight', availableHeight);
+    const pageSize = Math.floor((availableHeight - 1) / itemHeight);
+    console.log('pageSize', pageSize);
+    return pageSize > 0 ? pageSize : 1;
+};
 
 export const InventoryTable = ({ 
     items, 
@@ -120,9 +133,38 @@ export const InventoryTable = ({
     paginationModel,
     onPaginationModelChange,
 }: InventoryTableProps) => {
-    console.log(items.length);
+    const [modalOpen, setModalOpen] = useState(false);
+    const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const [pageSize, setPageSize] = useState(1);
+
+    useEffect(() => {
+        if (containerRef.current) {
+            const height = containerRef.current.clientHeight;
+            const calculatedSize = calculatePageSize(height, 80);
+            setPageSize(calculatedSize);
+            
+            if (onPaginationModelChange && paginationModel) {
+                onPaginationModelChange({ ...paginationModel, pageSize: calculatedSize });
+            }
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    const handleEditClick = (product: Product) => {
+        setSelectedProduct(product);
+        setModalOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setModalOpen(false);
+    };
+
+    const columns = useMemo(() => getColumns(handleEditClick), []);
+
     return (
-        <Box className={styles.tableContainer} sx={{
+        <>
+        <Box  className={styles.tableContainer} sx={{
             height: '100%',
             width: '100%',
             display: 'flex',
@@ -193,6 +235,7 @@ export const InventoryTable = ({
             }
         }}>
             <DataGrid
+            ref={containerRef}
                 rows={items}
                 columns={columns}
                 disableRowSelectionOnClick
@@ -208,11 +251,17 @@ export const InventoryTable = ({
                 onPaginationModelChange={onPaginationModelChange}
                 initialState={{
                     pagination: {
-                        paginationModel: { pageSize: 1 },
+                        paginationModel: { pageSize },
                     },
                 }}
-                pageSizeOptions={[1, 10, 25]}
+                pageSizeOptions={[pageSize]}
             />
         </Box>
+        <AddStockModal 
+            open={modalOpen} 
+            onClose={handleCloseModal} 
+            product={selectedProduct} 
+        />
+        </>
     );
 };

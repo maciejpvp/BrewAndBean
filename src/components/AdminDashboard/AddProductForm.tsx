@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import type { ChangeEvent } from 'react';
 import { apiClient } from '../../lib/apiClient';
-import styles from './ProductForm.module.css';
+import styles from './AddProductForm.module.css';
 
-import { CoreNarrativeSection } from './ProductFormParts/CoreNarrativeSection';
-import { TechSpecsSection } from './ProductFormParts/TechSpecsSection';
-import { SensoryAttributesSection } from './ProductFormParts/SensoryAttributesSection';
-import { InventoryLogicSection } from './ProductFormParts/InventoryLogicSection';
-import { CategorizationSection } from './ProductFormParts/CategorizationSection';
-import { VisualAssetsSection } from './ProductFormParts/VisualAssetsSection';
+import { CoreNarrativeSection } from './AddProductFormParts/CoreNarrativeSection';
+import { TechSpecsSection } from './AddProductFormParts/TechSpecsSection';
+import { SensoryAttributesSection } from './AddProductFormParts/SensoryAttributesSection';
+import { InventoryLogicSection } from './AddProductFormParts/InventoryLogicSection';
+import { CategorizationSection } from './AddProductFormParts/CategorizationSection';
+import { VisualAssetsSection } from './AddProductFormParts/VisualAssetsSection';
+import { useNavigate } from 'react-router-dom';
 
 export interface TechSpec {
   label: string;
@@ -20,7 +21,7 @@ export interface Attribute {
   value: string;
 }
 
-interface ProductFormData {
+interface AddProductFormData {
   name: string;
   description: string;
   tech_spec: TechSpec[];
@@ -41,8 +42,9 @@ interface CreateProductResponse {
   presignedPosts?: PresignedPostData[];
 }
 
-export default function ProductForm() {
-  const [formData, setFormData] = useState<ProductFormData>({
+export default function AddAddProductForm() {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState<AddProductFormData>({
     name: "Bialetti Moka Express",
     description: "The original stovetop espresso maker, serving up authentic Italian coffee since 1933. Crafted from high-quality polished aluminum with its iconic octagonal shape for perfect heat diffusion.",
     tech_spec: [
@@ -187,13 +189,11 @@ export default function ProductForm() {
           }
           s3FormData.append('file', fileToUpload);
 
-          const s3Response = await fetch(presignedData.uploadUrl, {
+          await fetch(presignedData.uploadUrl, {
             method: 'POST',
             body: s3FormData,
+            mode: 'no-cors',
           });
-          if (!s3Response.ok) {
-            throw new Error(`Failed to upload image ${index + 1} to S3`);
-          }
         });
         await Promise.all(uploadPromises);
       }
@@ -216,7 +216,7 @@ export default function ProductForm() {
       <div className={styles.header}>
         <div>
           <nav className={styles.breadcrumbs}>
-            <span>Inventory</span>
+              <span onClick={() => navigate("/dashboard/inventory")}>Inventory</span>
             <span>/</span>
             <span className={styles.breadcrumbActive}>New Selection</span>
           </nav>
