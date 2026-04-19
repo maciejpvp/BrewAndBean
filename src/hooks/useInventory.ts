@@ -11,7 +11,12 @@ export const useInventory = (paginationModel: { page: number; pageSize: number }
     const query = useQuery({
         queryKey: [...productKeys.all, 'inventory', paginationModel.page, paginationModel.pageSize],
         queryFn: async () => {
-            const data = await fetchProductsByCategory("equipment", paginationModel.pageSize, currentToken);
+            const data = await fetchProductsByCategory({
+                category: "equipment",
+                limit: paginationModel.pageSize,
+                nextToken: currentToken,
+                populateCategories: true,
+            });
             if (data.nextToken) {
                 setPageTokens((prev) => ({
                     ...prev,
@@ -20,12 +25,13 @@ export const useInventory = (paginationModel: { page: number; pageSize: number }
             }
             return data;
         },
+        enabled: paginationModel.pageSize > 0,
         staleTime: 1000 * 60 * 5, // 5 minutes
     });
 
     return {
         data: query.data ?? { products: [], nextToken: undefined },
-        loading: query.isLoading || query.isFetching,
+        loading: query.isLoading || query.isFetching || (paginationModel.pageSize === 0),
         error: query.error,
         refetch: query.refetch,
     };

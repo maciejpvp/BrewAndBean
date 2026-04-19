@@ -16,9 +16,9 @@ const SKELETON_COUNT = 8;
 
 export const ProductList = ({ category = '', categoryLabel, products: propProducts, isLoading: propIsLoading }: ProductListProps) => {
     const navigate = useNavigate();
-    const { data: fetchedProducts, isLoading: isFetching, isError: isFetchError, error: fetchError, refetch } = useProductsByCategory(propProducts ? null : category);
+    const { data, isLoading: isFetching, isError: isFetchError, error: fetchError, refetch } = useProductsByCategory(propProducts ? null : category);
 
-    const products = propProducts || fetchedProducts;
+    const products = propProducts || data?.products;
     const isLoading = propIsLoading || (!propProducts && isFetching);
     const isError = !propProducts && isFetchError;
     const error = fetchError;

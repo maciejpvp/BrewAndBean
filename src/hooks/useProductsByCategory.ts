@@ -9,7 +9,7 @@ export const productKeys = {
 export const useProductsByCategory = (category: string | null) =>
     useQuery({
         queryKey: productKeys.byCategory(category ?? ''),
-        queryFn: () => fetchProductsByCategory(category!),
+        queryFn: () => fetchProductsByCategory({ category: category! }),
         enabled: !!category,
         staleTime: 1000 * 60 * 5, // 5 minutes
     });

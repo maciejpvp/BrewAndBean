@@ -5,7 +5,7 @@ import { InventoryTable } from './InventoryTable';
 import styles from './Inventory.module.css';
 
 export const InventoryPage = () => {
-    const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 1 });
+    const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 0 });
 
     const { 
         data, 

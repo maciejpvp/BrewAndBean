@@ -26,25 +26,25 @@ export const EquipmentPage = () => {
         setCurrentTab(newValue);
     };
 
-    const { data: products, isLoading } = useProductsByCategory(slugs[currentTab]);
+    const { data, isLoading } = useProductsByCategory(slugs[currentTab]);
 
-    console.log(products);
+    console.log(data);
 
     return (
         <Box component="main">
             <Container maxWidth="xl" sx={{ px: { xs: 3, md: 6 } }}>
                 <EquipmentHero />
-                <EquipmentCategories 
-                    basePath="equipment" 
-                    currentTab={currentTab} 
-                    onTabChange={handleTabChange} 
-                    categories={CATEGORIES} 
+                <EquipmentCategories
+                    basePath="equipment"
+                    currentTab={currentTab}
+                    onTabChange={handleTabChange}
+                    categories={CATEGORIES}
                 />
-                
+
                 <Box sx={{ pb: 16 }}>
-                    <ProductList 
-                        products={products || []} 
-                        categoryLabel={CATEGORIES[currentTab].label} 
+                    <ProductList
+                        products={data?.products || []}
+                        categoryLabel={CATEGORIES[currentTab].label}
                         isLoading={isLoading}
                     />
                 </Box>
