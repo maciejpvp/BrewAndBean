@@ -9,6 +9,7 @@ import { CDN_URL } from '../../../lib/apiClient';
 import { Chip } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import type { StockStatus } from './types';
 import { AddStockModal } from '../../../components/AdminDashboard/Inventory/AddStockModal';
 import { AddCategoryModal } from '../../../components/AdminDashboard/Inventory/AddCategoryModal';
@@ -156,10 +157,18 @@ const getColumns = (
             sortable: false,
             renderCell: (params: GridRenderCellParams<Product>) => (
                 <div className={styles.actionsCell}>
-                    <button onClick={() => onEditClick(params.row)} className={styles.actionBtn} aria-label="Edit">
+                    <button
+                        onClick={() => navigator.clipboard.writeText(params.row.id)}
+                        className={styles.actionBtn}
+                        aria-label="Copy ID"
+                        title="Copy ID"
+                    >
+                        <ContentCopyIcon className={styles.actionIcon} />
+                    </button>
+                    <button onClick={() => onEditClick(params.row)} className={styles.actionBtn} aria-label="Edit" title="Edit Product">
                         <EditIcon className={styles.actionIcon} />
                     </button>
-                    <button onClick={() => console.log('Delete')} className={styles.actionBtn} aria-label="Delete">
+                    <button onClick={() => console.log('Delete')} className={styles.actionBtn} aria-label="Delete" title="Delete Product">
                         <DeleteOutlineIcon className={styles.actionIcon} />
                     </button>
                 </div>

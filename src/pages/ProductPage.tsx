@@ -1,6 +1,7 @@
 import { ProductMedia } from '../components/products/product-detail/ProductMedia';
 import { ProductDescription } from '../components/products/product-detail/ProductDescription';
 import { ProductSpecification } from '../components/products/product-detail/ProductSpecification';
+import { VariantsList } from '../components/products/product-detail/VariantsList';
 import styles from './ProductPage.module.css';
 import { useParams } from 'react-router-dom';
 import { useProduct } from '../hooks/useProduct';
@@ -8,7 +9,7 @@ import { useProduct } from '../hooks/useProduct';
 export const ProductPage = () => {
     const { id } = useParams();
     console.log(id);
-    const { data: product, isLoading, error } = useProduct(id); 
+    const { data: product, isLoading, error } = useProduct(id);
     if (isLoading) {
         return <div>Loading...</div>;
     }
@@ -57,6 +58,10 @@ export const ProductPage = () => {
                             <span className={styles.bentoValue}>{product.attributes.profile}</span>
                         </div>}
                     </div>
+
+                    {product.variants && product.variants.length > 0 && (
+                        <VariantsList variants={product.variants} />
+                    )}
 
                     <div className={styles.actionStack}>
                         <div className={styles.actionRow}>

@@ -28,8 +28,6 @@ export const EquipmentPage = () => {
 
     const { data, isLoading } = useProductsByCategory(slugs[currentTab]);
 
-    console.log(data);
-
     return (
         <Box component="main">
             <Container maxWidth="xl" sx={{ px: { xs: 3, md: 6 } }}>

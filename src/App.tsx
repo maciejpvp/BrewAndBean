@@ -81,10 +81,10 @@ function AppContent() {
               <nav>
                 {isCheckout ? <CheckoutNavbar /> : <Navbar />}
               </nav>
-              <main>
+              <main style={{ minHeight: 'calc(100vh - 300px)', display: 'flex', flexDirection: 'column' }}>
                 <Suspense fallback={
-                  <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '4rem', width: '100%' }}>
-                    <CircularProgress />
+                  <Box sx={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', py: 8 }}>
+                    <CircularProgress sx={{ color: 'var(--primary)' }} />
                   </Box>
                 }>
                   <Routes>
