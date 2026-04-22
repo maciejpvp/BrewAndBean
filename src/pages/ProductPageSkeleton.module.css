@@ -1,0 +1,91 @@
+.shimmerBlock {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--surface-container-low, #f6f3ee);
+}
+
+.shimmerEffect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(255, 255, 255, 0.6) 50%,
+    transparent 100%
+  );
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.imageSkeleton {
+  aspect-ratio: 4 / 5;
+  width: 100%;
+  border-radius: 0.5rem;
+}
+
+.breadcrumbSkeleton {
+  margin-bottom: 2rem;
+  height: 0.75rem;
+  width: 20%;
+  border-radius: 0.25rem;
+}
+
+.titleSkeleton {
+  margin-bottom: 1.5rem;
+  height: 3rem;
+  width: 70%;
+  border-radius: 0.25rem;
+}
+
+.priceSkeleton {
+  margin-bottom: 2.5rem;
+  height: 2rem;
+  width: 30%;
+  border-radius: 0.25rem;
+}
+
+.variantsContainer {
+  margin-bottom: 2.5rem;
+}
+
+.variantsGrid {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.variantCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 4.5rem;
+}
+
+.variantImageSkeleton {
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  border-radius: 0.375rem;
+  border: 1px solid rgba(210, 196, 188, 0.3);
+}
+
+.variantNameSkeleton {
+  height: 0.75rem;
+  width: 80%;
+  margin: 0 auto;
+  border-radius: 0.25rem;
+}
+
+.disabledAction {
+  opacity: 0.5;
+  filter: grayscale(100%);
+  pointer-events: none;
+}

@@ -5,13 +5,14 @@ import { VariantsList } from '../components/products/product-detail/VariantsList
 import styles from './ProductPage.module.css';
 import { useParams } from 'react-router-dom';
 import { useProduct } from '../hooks/useProduct';
+import { ProductPageSkeleton } from './ProductPageSkeleton';
 
 export const ProductPage = () => {
     const { id } = useParams();
     console.log(id);
     const { data: product, isLoading, error } = useProduct(id);
     if (isLoading) {
-        return <div>Loading...</div>;
+        return <ProductPageSkeleton />;
     }
     if (error || !product) {
         return <div>Error: {error?.message || "Product not found"}</div>;

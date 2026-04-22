@@ -13,6 +13,7 @@ import { useUserStore } from './store/useUserStore';
 import { useThemeStore } from './store/useThemeStore';
 import { Footer } from './components/Footer';
 import { ProtectedRoute } from './utils/ProtectedRoute';
+import { ProductPageSkeleton } from './pages/ProductPageSkeleton';
 
 const LoginPage = lazy(() => import('./pages/LoginPage').then(m => ({ default: m.LoginPage })));
 const ProductPage = lazy(() => import('./pages/ProductPage').then(m => ({ default: m.ProductPage })));
@@ -88,7 +89,11 @@ function AppContent() {
                   </Box>
                 }>
                   <Routes>
-                    <Route path="/product/:id" element={<ProductPage />} />
+                    <Route path="/product/:id" element={
+                      <Suspense fallback={<ProductPageSkeleton />}>
+                        <ProductPage />
+                      </Suspense>
+                    } />
                     <Route path="/checkout" element={<CheckoutPage />} />
                     <Route path="/our-story" element={<OurStoryPage />} />
                     <Route path="/brew-guides" element={<BrewGuides />} />
