@@ -1,16 +1,17 @@
 import React from 'react';
-import styles from '../AddProductForm.module.css';
-import type { TechSpec } from '../AddAddProductForm';
+import styles from '../ProductForm.module.css';
+import type { TechSpec } from '../ProductForm';
 
 interface Props {
   techSpecs: TechSpec[];
   handleTechSpecChange: (index: number, field: 'label' | 'value', value: string) => void;
   addTechSpecRow: () => void;
   removeTechSpecRow: (index: number) => void;
+  dirtyRows?: boolean[];
 }
 
 export const TechSpecsSection: React.FC<Props> = ({
-  techSpecs, handleTechSpecChange, addTechSpecRow, removeTechSpecRow
+  techSpecs, handleTechSpecChange, addTechSpecRow, removeTechSpecRow, dirtyRows
 }) => {
   return (
     <section>
@@ -34,7 +35,7 @@ export const TechSpecsSection: React.FC<Props> = ({
           </thead>
           <tbody>
             {techSpecs.map((spec, index) => (
-              <tr key={index}>
+              <tr key={index} className={dirtyRows?.[index] ? styles.dirtyField : ''}>
                 <td>
                   <input 
                     className={`${styles.gridInput} ${styles.fontMedium}`} 
@@ -64,3 +65,4 @@ export const TechSpecsSection: React.FC<Props> = ({
     </section>
   );
 };
+

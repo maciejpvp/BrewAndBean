@@ -1,13 +1,17 @@
 import React, { type ChangeEvent } from 'react';
-import styles from '../AddProductForm.module.css';
+import styles from '../ProductForm.module.css';
 
 interface Props {
   name: string;
   description: string;
   handleInputChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  dirtyName?: boolean;
+  dirtyDescription?: boolean;
 }
 
-export const CoreNarrativeSection: React.FC<Props> = ({ name, description, handleInputChange }) => {
+export const CoreNarrativeSection: React.FC<Props> = ({ 
+  name, description, handleInputChange, dirtyName, dirtyDescription 
+}) => {
   return (
     <section>
       <div className={styles.sectionHeader}>
@@ -18,7 +22,7 @@ export const CoreNarrativeSection: React.FC<Props> = ({ name, description, handl
         <div className={styles.inputGroup}>
           <label className={styles.label}>Product Title</label>
           <input 
-            className={styles.editorialInput} 
+            className={`${styles.editorialInput} ${dirtyName ? styles.dirtyField : ''}`} 
             placeholder="e.g. Ethiopian Yirgacheffe G1 Reserve" 
             type="text" 
             name="name"
@@ -30,7 +34,7 @@ export const CoreNarrativeSection: React.FC<Props> = ({ name, description, handl
         <div className={styles.inputGroup}>
           <label className={styles.label}>Editorial Description</label>
           <textarea 
-            className={styles.editorialInputTextarea} 
+            className={`${styles.editorialInputTextarea} ${dirtyDescription ? styles.dirtyField : ''}`} 
             placeholder="Describe the sensory experience, roast profile, and origin story..." 
             rows={6}
             name="description"

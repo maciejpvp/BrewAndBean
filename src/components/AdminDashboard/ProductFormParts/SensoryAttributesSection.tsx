@@ -1,16 +1,17 @@
 import React from 'react';
-import styles from '../AddProductForm.module.css';
-import type { Attribute } from '../AddAddProductForm';
+import styles from '../ProductForm.module.css';
+import type { Attribute } from '../ProductForm';
 
 interface Props {
   attributes: Attribute[];
   handleAttributeChange: (index: number, field: 'key' | 'value', value: string) => void;
   addAttributeRow: () => void;
   removeAttributeRow: (index: number) => void;
+  dirtyRows?: boolean[];
 }
 
 export const SensoryAttributesSection: React.FC<Props> = ({
-  attributes, handleAttributeChange, addAttributeRow, removeAttributeRow
+  attributes, handleAttributeChange, addAttributeRow, removeAttributeRow, dirtyRows
 }) => {
   return (
     <section>
@@ -25,7 +26,7 @@ export const SensoryAttributesSection: React.FC<Props> = ({
       </div>
       <div className={styles.attributesGrid}>
         {attributes.map((attr, index) => (
-          <div className={styles.attributeCard} key={index}>
+          <div className={`${styles.attributeCard} ${dirtyRows?.[index] ? styles.dirtyField : ''}`} key={index}>
             <div className={styles.attributeInputWrap}>
               <input 
                 className={styles.label} 

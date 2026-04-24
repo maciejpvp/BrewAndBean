@@ -23,7 +23,7 @@ const OurStoryPage = lazy(() => import('./pages/OurStoryPage'));
 const BrewGuides = lazy(() => import('./pages/BrewGuides'));
 const RoastsPage = lazy(() => import('./pages/RoastsPage'));
 const AdminDashboard = lazy(() => import('./pages/AdminDashboard').then(m => ({ default: m.AdminDashboard })));
-const AddProductForm = lazy(() => import('./components/AdminDashboard/AddProductForm'));
+const ProductForm = lazy(() => import('./components/AdminDashboard/ProductForm'));
 const InventoryPage = lazy(() => import('./pages/Dashboard/Inventory').then(m => ({ default: m.InventoryPage })));
 
 const queryClient = new QueryClient({
@@ -68,7 +68,8 @@ function AppContent() {
             <Route index element={<Navigate to="inventory" replace />} />
 
             <Route path="inventory" element={<InventoryPage />} />
-            <Route path="inventory/new" element={<AddProductForm />} />
+            <Route path="inventory/new" element={<ProductForm />} />
+            <Route path="inventory/edit/:id" element={<ProductForm isEdit={true} />} />
 
             <Route path="*" element={<Navigate to="/dashboard/inventory" replace />} />
           </Route>
@@ -89,6 +90,7 @@ function AppContent() {
                   </Box>
                 }>
                   <Routes>
+                    <Route path="/" element={<Navigate to="/equipment" replace />} />
                     <Route path="/product/:id" element={
                       <Suspense fallback={<ProductPageSkeleton />}>
                         <ProductPage />

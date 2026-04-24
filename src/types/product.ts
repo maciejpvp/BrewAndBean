@@ -14,6 +14,7 @@ export interface Product {
     media: ProductMedia[];
     categories: { name: string, slug: string }[];
     tech_spec?: { label: string, value: string }[];
+    group?: string;
     attributes?: {
         roastLevel?: string;
         roastPercent?: number;

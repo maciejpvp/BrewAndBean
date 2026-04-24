@@ -1,7 +1,6 @@
 import { useState, useMemo, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { DataGrid, type GridColDef, type GridRenderCellParams } from '@mui/x-data-grid';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import Box from '@mui/material/Box';
 import type { Product } from '../../../types/product';
 import styles from './Inventory.module.css';
@@ -9,11 +8,12 @@ import { CDN_URL } from '../../../lib/apiClient';
 import { Chip } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import type { StockStatus } from './types';
-import { AddStockModal } from '../../../components/AdminDashboard/Inventory/AddStockModal';
 import { AddCategoryModal } from '../../../components/AdminDashboard/Inventory/AddCategoryModal';
 import { RemoveCategoryModal } from '../../../components/AdminDashboard/Inventory/RemoveCategoryModal';
+import { RowActions } from './RowActions';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 
 interface InventoryTableProps {
     items: Product[];
@@ -26,7 +26,8 @@ interface InventoryTableProps {
 const getColumns = (
     onEditClick: (product: Product) => void,
     onAddCategoryClick: (product: Product) => void,
-    onRemoveCategoryClick: (product: Product, category: string) => void
+    onRemoveCategoryClick: (product: Product, category: string) => void,
+    isMobile: boolean
 ): GridColDef<Product>[] => [
         {
             field: 'name',
@@ -39,7 +40,14 @@ const getColumns = (
                         <div className={styles.productImage}>
                             {itemKey && <img src={`${CDN_URL}/${itemKey}`} alt={String(params.value)} />}
                         </div>
-                        <h3 className={styles.productName}>{params.value}</h3>
+                        <div className={styles.productInfo}>
+                            {params.row.group && (
+                                <span className={styles.productGroup}>
+                                    {params.row.group}
+                                </span>
+                            )}
+                            <h3 className={styles.productName}>{params.value}</h3>
+                        </div>
                     </div>
                 );
             },
@@ -79,7 +87,7 @@ const getColumns = (
                                             paddingRight: '22px', // Smoothly push text to make room
                                         }
                                     },
-                                    '& .MuiChip-label': { 
+                                    '& .MuiChip-label': {
                                         px: 1,
                                         transition: 'padding 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
                                     },
@@ -156,22 +164,12 @@ const getColumns = (
             align: 'left',
             sortable: false,
             renderCell: (params: GridRenderCellParams<Product>) => (
-                <div className={styles.actionsCell}>
-                    <button
-                        onClick={() => navigator.clipboard.writeText(params.row.id)}
-                        className={styles.actionBtn}
-                        aria-label="Copy ID"
-                        title="Copy ID"
-                    >
-                        <ContentCopyIcon className={styles.actionIcon} />
-                    </button>
-                    <button onClick={() => onEditClick(params.row)} className={styles.actionBtn} aria-label="Edit" title="Edit Product">
-                        <EditIcon className={styles.actionIcon} />
-                    </button>
-                    <button onClick={() => console.log('Delete')} className={styles.actionBtn} aria-label="Delete" title="Delete Product">
-                        <DeleteOutlineIcon className={styles.actionIcon} />
-                    </button>
-                </div>
+                <RowActions
+                    product={params.row}
+                    onEdit={onEditClick}
+                    onDelete={(product) => console.log('Delete', product)}
+                    isMobile={isMobile}
+                />
             ),
         },
     ];
@@ -194,12 +192,14 @@ export const InventoryTable = ({
     paginationModel,
     onPaginationModelChange,
 }: InventoryTableProps) => {
-    const [modalOpen, setModalOpen] = useState(false);
     const [categoryModalOpen, setCategoryModalOpen] = useState(false);
     const [removeCategoryModalOpen, setRemoveCategoryModalOpen] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
     const [categoryToRemove, setCategoryToRemove] = useState<string | undefined>(undefined);
     const containerRef = useRef<HTMLDivElement>(null);
+    const navigate = useNavigate();
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('lg')); // Using 'lg' (1200px) as breakpoint for table actions
 
     useEffect(() => {
         if (containerRef.current) {
@@ -214,13 +214,9 @@ export const InventoryTable = ({
     }, []);
 
     const handleEditClick = (product: Product) => {
-        setSelectedProduct(product);
-        setModalOpen(true);
+        navigate(`/dashboard/inventory/edit/${product.id}`, { state: { product } });
     };
 
-    const handleCloseModal = () => {
-        setModalOpen(false);
-    };
 
     const handleAddCategoryClick = (product: Product) => {
         setSelectedProduct(product);
@@ -241,7 +237,7 @@ export const InventoryTable = ({
         setRemoveCategoryModalOpen(false);
     };
 
-    const columns = useMemo(() => getColumns(handleEditClick, handleAddCategoryClick, handleRemoveCategoryClick), []);
+    const columns = useMemo(() => getColumns(handleEditClick, handleAddCategoryClick, handleRemoveCategoryClick, isMobile), [isMobile]);
 
     return (
         <>
@@ -338,11 +334,6 @@ export const InventoryTable = ({
                     pageSizeOptions={[paginationModel?.pageSize || 1]}
                 />
             </Box>
-            <AddStockModal
-                open={modalOpen}
-                onClose={handleCloseModal}
-                product={selectedProduct}
-            />
             <AddCategoryModal
                 open={categoryModalOpen}
                 onClose={handleCloseCategoryModal}

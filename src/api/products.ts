@@ -64,30 +64,27 @@ export const fetchProductById = async (id: string): Promise<Product> => {
     return data.product;
 };
 
-/**
- * Update product stock.
- * @param id Product ID.
- * @param stock New stock quantity.
- * @param version Product version.
- * @returns True if stock was updated successfully, false otherwise.
- */
-export const updateProductStock = async ({
+export const updateProduct = async ({
     id,
-    stock,
+    data,
     version
 }: {
     id: string;
-    stock: number;
+    data: Partial<Product>;
     version: number;
 }): Promise<boolean> => {
     try {
-        const response = await apiClient.patch(`/products/update/${id}`, { stock, version });
+        const body = {
+            data,
+            version
+        }
+        const response = await apiClient.patch(`/products/update/${id}`, body);
 
         const isSuccess: boolean = response.status === 200;
 
         return isSuccess;
     } catch (error) {
-        console.error('Error updating product stock:', error);
+        console.error('Error updating product:', error);
         return false;
     }
 };
