@@ -7,9 +7,9 @@ import styles from './Inventory.module.css';
 export const InventoryPage = () => {
     const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 0 });
 
-    const { 
-        data, 
-        loading, 
+    const {
+        data,
+        loading,
     } = useInventory(paginationModel);
 
     const { products, nextToken } = data;
@@ -17,7 +17,7 @@ export const InventoryPage = () => {
     return (
         <div className={styles.container}>
             <InventoryHeader />
-            <InventoryTable 
+            <InventoryTable
                 items={products}
                 loading={loading}
                 hasNextPage={!!nextToken}

@@ -121,3 +121,40 @@ export const manageProductCategories = async (params: ManageProductCategoriesPar
         return false;
     }
 }
+
+export type ManageProductGroupParams = {
+    mode: "add";
+    productIds: string[];
+    group: string;
+} | {
+    mode: "delete";
+    productIds: string[];
+}
+
+export const manageProductGroup = async (params: ManageProductGroupParams): Promise<boolean> => {
+    try {
+        const { mode } = params;
+
+        const response = mode === "add"
+            ? await apiClient.post("/products/group", {
+                productIds: params.productIds,
+                group: params.group,
+            })
+            : mode === "delete"
+                ? await apiClient.delete("/products/group", {
+                    data: {
+                        productIds: params.productIds,
+                    },
+                })
+                : false;
+
+        if (!response) return false;
+
+        const isSuccess: boolean = response.status === 200;
+
+        return isSuccess;
+    } catch (error) {
+        console.error('Error managing product group:', error);
+        return false;
+    }
+}

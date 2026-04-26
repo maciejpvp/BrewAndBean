@@ -1,6 +1,6 @@
-import { useState, useMemo, useEffect, useRef } from 'react';
+import { useState, useMemo, useEffect, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { DataGrid, type GridColDef, type GridRenderCellParams } from '@mui/x-data-grid';
+import { DataGrid, type GridColDef, type GridRenderCellParams, type GridRowSelectionModel } from '@mui/x-data-grid';
 import Box from '@mui/material/Box';
 import type { Product } from '../../../types/product';
 import styles from './Inventory.module.css';
@@ -8,9 +8,13 @@ import { CDN_URL } from '../../../lib/apiClient';
 import { Chip } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import GroupRemoveIcon from '@mui/icons-material/GroupRemove';
 import type { StockStatus } from './types';
 import { AddCategoryModal } from '../../../components/AdminDashboard/Inventory/AddCategoryModal';
 import { RemoveCategoryModal } from '../../../components/AdminDashboard/Inventory/RemoveCategoryModal';
+import { BatchGroupModal } from '../../../components/AdminDashboard/Inventory/BatchGroupModal';
+import { useManageGroup } from '../../../hooks/useManageGroup';
 import { RowActions } from './RowActions';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
@@ -21,6 +25,7 @@ interface InventoryTableProps {
     hasNextPage?: boolean;
     paginationModel?: { page: number; pageSize: number };
     onPaginationModelChange?: (model: { page: number; pageSize: number }) => void;
+    onSelectionChange?: (selectedIds: string[]) => void;
 }
 
 const getColumns = (
@@ -191,11 +196,15 @@ export const InventoryTable = ({
     hasNextPage,
     paginationModel,
     onPaginationModelChange,
+    onSelectionChange,
 }: InventoryTableProps) => {
     const [categoryModalOpen, setCategoryModalOpen] = useState(false);
     const [removeCategoryModalOpen, setRemoveCategoryModalOpen] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
     const [categoryToRemove, setCategoryToRemove] = useState<string | undefined>(undefined);
+    const [selectedIds, setSelectedIds] = useState<string[]>([]);
+    const [batchGroupModalOpen, setBatchGroupModalOpen] = useState(false);
+    const manageGroupMutation = useManageGroup();
     const containerRef = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
     const theme = useTheme();
@@ -235,6 +244,42 @@ export const InventoryTable = ({
 
     const handleCloseRemoveCategoryModal = () => {
         setRemoveCategoryModalOpen(false);
+    };
+
+    const handleRowSelectionChange = useCallback((model: GridRowSelectionModel) => {
+        const ids = model.ids ? [...model.ids].map(String) : [];
+        setSelectedIds(ids);
+        onSelectionChange?.(ids);
+    }, [onSelectionChange]);
+
+    const handleBatchAddGroup = () => {
+        setBatchGroupModalOpen(true);
+    };
+
+    const handleBatchRemoveGroup = () => {
+        if (selectedIds.length === 0) return;
+
+        manageGroupMutation.mutate(
+            {
+                productIds: selectedIds,
+                mode: 'delete',
+                group: "", // Unused for delete action
+            },
+            {
+                onSuccess: () => {
+                    setSelectedIds([]);
+                    onSelectionChange?.([]);
+                },
+                onError: () => {
+                    console.error("Failed to remove products from group");
+                }
+            }
+        );
+    };
+
+    const handleBatchSuccess = () => {
+        setSelectedIds([]);
+        onSelectionChange?.([]);
     };
 
     const columns = useMemo(() => getColumns(handleEditClick, handleAddCategoryClick, handleRemoveCategoryClick, isMobile), [isMobile]);
@@ -311,10 +356,31 @@ export const InventoryTable = ({
                     color: 'var(--primary)',
                 }
             }}>
+                {selectedIds.length > 0 && (
+                    <div className={styles.batchActions}>
+                        <div className={styles.batchActionsInfo}>
+                            <span className={styles.selectedCount}>
+                                {selectedIds.length} Selected
+                            </span>
+                            <span>Items to modify</span>
+                        </div>
+                        <div className={styles.batchActionsButtons}>
+                            <button className={styles.batchButton} onClick={handleBatchAddGroup}>
+                                <GroupAddIcon sx={{ fontSize: 18 }} />
+                                Add Group
+                            </button>
+                            <button className={styles.batchButton} onClick={handleBatchRemoveGroup}>
+                                <GroupRemoveIcon sx={{ fontSize: 18 }} />
+                                Remove Group
+                            </button>
+                        </div>
+                    </div>
+                )}
                 <DataGrid
                     ref={containerRef}
                     rows={items}
                     columns={columns}
+                    checkboxSelection
                     disableRowSelectionOnClick
                     rowHeight={80}
                     columnHeaderHeight={48}
@@ -326,6 +392,7 @@ export const InventoryTable = ({
                     rowCount={-1}
                     paginationModel={paginationModel}
                     onPaginationModelChange={onPaginationModelChange}
+                    onRowSelectionModelChange={handleRowSelectionChange}
                     initialState={{
                         pagination: {
                             paginationModel: { pageSize: paginationModel?.pageSize || 1 },
@@ -344,6 +411,12 @@ export const InventoryTable = ({
                 onClose={handleCloseRemoveCategoryModal}
                 product={selectedProduct}
                 categoryToRemove={categoryToRemove}
+            />
+            <BatchGroupModal
+                open={batchGroupModalOpen}
+                onClose={() => setBatchGroupModalOpen(false)}
+                selectedIds={selectedIds}
+                onSuccess={handleBatchSuccess}
             />
         </>
     );

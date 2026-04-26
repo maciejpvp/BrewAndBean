@@ -2,10 +2,12 @@ import styles from './ProductSpecification.module.css';
 import type { Product } from '../../../types/product';
 
 interface ProductSpecificationProps {
-    specifications: Product['tech_spec'];
+    specifications: Product['tech_spec'] | undefined;
 }
 
 export const ProductSpecification = ({ specifications }: ProductSpecificationProps) => {
+    if (!specifications) return null;
+
     return (
         <div className={styles.specWrapper}>
             <h2 className={styles.title}>Technical Specifications</h2>

@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { updateProductStock } from '../api/products';
+import { updateProduct } from '../api/products';
 import { productKeys } from './useProductsByCategory';
 import type { Product } from '../types/product';
 
@@ -14,7 +14,7 @@ export const useUpdateStock = () => {
 
     return useMutation({
         mutationFn: async ({ id, stock, version }: UpdateStockVariables) => {
-            const success = await updateProductStock({ id, stock, version });
+            const success = await updateProduct({ id, data: { stock }, version });
             if (!success) {
                 throw new Error('Failed to update stock');
             }
@@ -29,8 +29,8 @@ export const useUpdateStock = () => {
                     if ('products' in oldData && Array.isArray(oldData.products)) {
                         return {
                             ...oldData,
-                            products: oldData.products.map((product: Product) => 
-                                product.id === id 
+                            products: oldData.products.map((product: Product) =>
+                                product.id === id
                                     ? { ...product, stock, version: version + 1 }
                                     : product
                             ),
@@ -38,8 +38,8 @@ export const useUpdateStock = () => {
                     }
 
                     if (Array.isArray(oldData)) {
-                        return oldData.map((product: Product) => 
-                            product.id === id 
+                        return oldData.map((product: Product) =>
+                            product.id === id
                                 ? { ...product, stock, version: version + 1 }
                                 : product
                         );

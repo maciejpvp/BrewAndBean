@@ -97,7 +97,7 @@ export default function ProductForm({ isEdit }: ProductFormProps) {
     setSnackbar({ open: true, message, severity });
   };
 
-  const handleSnackbarClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
+  const handleSnackbarClose = (_event: unknown, reason?: string) => {
     if (reason === 'clickaway') return;
     setSnackbar(prev => ({ ...prev, open: false }));
   };
@@ -413,9 +413,9 @@ export default function ProductForm({ isEdit }: ProductFormProps) {
         </div>
       </div>
 
-      <Snackbar 
-        open={snackbar.open} 
-        autoHideDuration={6000} 
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={6000}
         onClose={handleSnackbarClose}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
       >
