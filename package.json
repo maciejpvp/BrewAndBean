@@ -6,6 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "build:dev": "bash scripts/build.sh dev",
+    "build:stage": "bash scripts/build.sh stage",
+    "build:prod": "bash scripts/build.sh prod",
     "lint": "eslint .",
     "preview": "vite preview"
   },

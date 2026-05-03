@@ -1,12 +1,14 @@
 import axios from 'axios';
 
-// https://5w9v2sffs8.execute-api.eu-central-1.amazonaws.com/prod
-// d17q0wnd7fgmqz.cloudfront.net
-const BASE_URL = 'https://d17q0wnd7fgmqz.cloudfront.net/api';
-export const CDN_URL = 'https://d17q0wnd7fgmqz.cloudfront.net/cdn';
+declare const BASE_URL: string;
+
+console.log(BASE_URL);
+
+export const API_URL = `${BASE_URL}/api`;
+export const CDN_URL = `${BASE_URL}/cdn`;
 
 export const apiClient = axios.create({
-    baseURL: `${BASE_URL}`,
+    baseURL: API_URL,
     headers: {
         'Content-Type': 'application/json',
     },
