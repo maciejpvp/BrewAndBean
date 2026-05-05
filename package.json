@@ -9,6 +9,7 @@
     "build:dev": "bash scripts/build.sh dev",
     "build:stage": "bash scripts/build.sh stage",
     "build:prod": "bash scripts/build.sh prod",
+    "deploy:dev": "bash scripts/deploy-s3-dev.sh",
     "lint": "eslint .",
     "preview": "vite preview"
   },
